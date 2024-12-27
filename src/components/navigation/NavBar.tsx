@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image'
 
 interface NavItem {
   label: string;
@@ -20,26 +21,32 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white border-b border-gray-200">
+    <nav className="bg-transparent navbar-custom-dashed-border border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <span className="text-2xl font-bold text-gray-900">Logo</span>
+          <div className="flex-shrink-0 gap-2 flex items-center">
+            <Image
+              src="/images/icons.svg"
+              alt="Logo Image."
+              width={40}
+              height={40}
+            />
+            <span className="text-2xl font-bold text-gradient">Artistic Echoes</span>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             {navigation.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-stale-800 hover:bg-slate-200/50 px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 {item.label}
               </a>
             ))}
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors">
+            <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
               Sign In
             </button>
           </div>
