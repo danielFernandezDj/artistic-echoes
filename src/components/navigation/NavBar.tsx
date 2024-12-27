@@ -9,10 +9,11 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
+  { label: 'Explore', href: '/' },
+  { label: 'Roadmap', href: '/roadmap' },
   { label: 'Contact', href: '/contact' },
+  { label: 'About', href: '/about' },
+  { label: 'License', href: '/license' },
 ];
 
 const Navbar = () => {
