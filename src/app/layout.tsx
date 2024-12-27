@@ -37,6 +37,7 @@ export default function RootLayout({
             ©2024 All rights reserved - Designed & Coded by Daniel Fernandez
           </p>
         </footer>
+        <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
       </body>
     </html>
   );

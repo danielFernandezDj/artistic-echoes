@@ -22,40 +22,9 @@ body {
 
 
 /* ----------------- New Code ----------------- */
-body,
-h3 {
-  font-family: "Inter-Regular", sans-serif;
-}
-
-h1 {
-  font-family: "Inter-Semibold", sans-serif;
-}
-
-h2 {
-  font-family: "Inter-Medium", sans-serif;
-  letter-spacing: 0.025em;
-  font-size: 1.25rem;
-}
-
-.font-roboto {
-  font-family: "Roboto-Slab", serif;
-}
-
 @layer components {
-  .main-app {
-    @apply w-full h-auto;
-  }
-
-  .hero-panel {
-    @apply w-full h-[30rem] py-10;
-  }
-
-  .body-panel {
-    @apply w-full h-auto;
-  }
-
   .text-gradient {
-    @apply bg-gradient-to-r from-orange-color from-20% to-magenta-color to-80% bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-orange-color to-magenta-color bg-clip-text text-transparent;
   }
 
   .pattern-bg {
@@ -67,8 +36,7 @@ h2 {
 
 .navbar-custom-dashed-border {
   border-bottom: 1px dashed rgb(219, 74, 22);
-  border-image: repeating-linear-gradient(
-      to right,
+  border-image: repeating-linear-gradient(to right,
       #d45b2b 0%,
       #d45b2b 6px,
       transparent 0px,
@@ -76,7 +44,5 @@ h2 {
       black 0px,
       black 6px,
       transparent 0px,
-      transparent 8px
-    )
-    1 stretch;
+      transparent 8px) 1 stretch;
 }
