@@ -1,0 +1,45 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ImageStock {
+    id                      String  @id @default(auto()) @map("_id") @db.ObjectId
+    objectID                Int     @unique   
+    museumID                Int                    
+    accessionNumber         String
+    accessionYear           Int
+    isPublicDomain          Boolean
+    objectType              String?
+    objectTitle             String?
+    medium                  String?
+    primaryImage            String?
+    primaryImageSmall       String?     
+    constituentULAN_URL     String?
+    constituentWikidata_URL String?
+    dimensions              String?
+    objectDate              String?
+    artistName              String?
+    artistDisplayBio        String?
+    artistNationality       String?
+    artistBeginDate         String?
+    artistEndDate           String?
+    artistWikidata_URL      String?
+    artistULAN_URL          String?
+    culture                 String?
+    creditLine              String?
+    repository              String?
+    objectURL               String?
+    GalleryNumber           String?
+    metadataDate            DateTime @default(now())
+
+    @@map("not-filter-stock")
+
+    // We only need these two indices since objectID is already indexed by @unique
+    @@index([museumID])
+    @@index([artistName])
+}
