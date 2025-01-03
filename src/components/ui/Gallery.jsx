@@ -1,4 +1,4 @@
-'as user'
+'user client'
 
 import { GetAllImages } from '../../app/api/images/GetAllImages'
 
@@ -7,18 +7,15 @@ export default async function GalleryPage() {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl mb-4">Gallery</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {images.map((image, index) => (
                     <div key={index} className="border p-4 rounded">
-                        {image.primaryImage && (
+                        {image.primaryImageSmall && (
                             <img
-                                src={image.primaryImage}
+                                src={image.primaryImageSmall}
                                 className="w-full h-48 object-cover"
                             />
                         )}
-                        <h2 className="mt-2">{image.objectTitle || 'Untitled'}</h2>
-                        <p>{image.artistName || 'Unknown Artist'}</p>
                     </div>
                 ))}
             </div>
