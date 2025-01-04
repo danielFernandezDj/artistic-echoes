@@ -32,12 +32,12 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
-        <footer className="flex justify-center items-center w-full h-auto py-5 text-white bg-blue-500">
+        {/* <footer className="flex justify-center items-center w-full h-auto py-5 text-white bg-blue-500">
           <p>
             ©2024 All rights reserved - Designed & Coded by Daniel Fernandez
           </p>
-        </footer>
-        <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
+        </footer> */}
+        {/* <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div> */}
       </body>
     </html>
   );

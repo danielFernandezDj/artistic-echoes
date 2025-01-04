@@ -20,11 +20,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 /* ----------------- New Code ----------------- */
 @layer components {
   .text-gradient {
     @apply bg-gradient-to-r from-orange-color to-magenta-color bg-clip-text text-transparent;
+  }
+
+  .image-gradient {
+    @apply bg-gradient-to-b from-slate-800/50 via-transparent  to-slate-800/10;
   }
 
   .pattern-bg {
@@ -36,7 +39,8 @@ body {
 
 .navbar-custom-dashed-border {
   border-bottom: 1px dashed rgb(219, 74, 22);
-  border-image: repeating-linear-gradient(to right,
+  border-image: repeating-linear-gradient(
+      to right,
       #d45b2b 0%,
       #d45b2b 6px,
       transparent 0px,
@@ -44,5 +48,7 @@ body {
       black 0px,
       black 6px,
       transparent 0px,
-      transparent 8px) 1 stretch;
+      transparent 8px
+    )
+    1 stretch;
 }
