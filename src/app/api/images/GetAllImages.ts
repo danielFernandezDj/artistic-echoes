@@ -39,6 +39,7 @@ export async function GetAllImages() {
       select: {
         id: true,
         primaryImageSmall: true,
+        objectTitle: true,
       },
     });
 
