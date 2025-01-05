@@ -47,7 +47,7 @@ const Navbar = () => {
               </a>
             ))}
             <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
-              Sign In
+              Donation
             </button>
           </div>
 

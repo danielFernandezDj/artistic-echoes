@@ -27,7 +27,7 @@ body {
   }
 
   .image-gradient {
-    @apply bg-gradient-to-b from-slate-800/50 via-transparent  to-slate-800/10;
+    @apply bg-gradient-to-b from-black/50 via-transparent  to-black/10;
   }
 
   .pattern-bg {
