@@ -1,7 +1,6 @@
 'user client'
 
 import { GetAllImages } from '../../app/api/images/GetAllImages'
-import ImageDownloadButton from './ImageDownloadBtn';
 import { ImageDown } from 'lucide-react';
 
 export default async function GalleryPage() {
@@ -25,11 +24,11 @@ export default async function GalleryPage() {
                             </h2>
                         </div>
                         <div className="z-10 absolute top-2  p-2  right-2 opacity-0 group-hover:opacity-100">
-                            <ImageDownloadButton
-                                imageURL={image.primaryImage}
-                                title={image.objectTitle}
-                                className='w-8 h-auto cursor-pointer text-slate-50'
-                            />
+                            <a href={`/api/download/${image.id}`} download>
+                                <ImageDown
+                                    className='w-8 h-auto cursor-pointer text-slate-50'
+                                />
+                            </a>
                         </div>
 
                         {image.primaryImageSmall && (

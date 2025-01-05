@@ -9,7 +9,7 @@ export default function Explore() {
             Free For all!
           </h1>
           <h2 className="font-medium lg:text-[min(5vw,55px)] text-gradient m-auto max-w-screen-xl">
-            Print your favorite Paint from our <br /> extensive library collection!
+            Print your favorite Paint and hang it on your wall!
           </h2>
         </section>
 
