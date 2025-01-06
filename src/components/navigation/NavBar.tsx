@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image'
 
@@ -11,17 +11,37 @@ interface NavItem {
 
 const navigation: NavItem[] = [
   { label: 'Explore', href: '/' },
-  { label: 'Roadmap', href: '/roadmap' },
   { label: 'Contact', href: '/contact' },
   { label: 'About', href: '/about' },
   { label: 'License', href: '/license' },
 ];
 
+const useScrolling = () => {
+  const [scrolling, setScrolling] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY >= 20) {
+      setScrolling(true);
+    } else {
+      setScrolling(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  return scrolling;
+}
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-transparent navbar-custom-dashed-border border-gray-200">
+    <nav className={`sticky top-0 z-10 bg-transparent navbar-custom-dashed-border border-gray-200 ${useScrolling() ? 'backdrop-blur-xl bg-white/30' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
@@ -86,6 +106,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
     </nav>
   );
 };
