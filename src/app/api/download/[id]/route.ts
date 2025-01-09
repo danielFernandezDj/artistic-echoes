@@ -1,45 +1,51 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma"; 
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+interface ImageStock {
+  primaryImage: string | null;
+  objectTitle: string | null;
+}
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  if (!params.id) {
+    return NextResponse.json(
+      { error: "No image ID provided" },
+      { status: 400 }
+    );
+  }
+
   try {
-    const image = await prisma.imageStock.findUnique({
+    const image: ImageStock | null = await prisma.imageStock.findUnique({
       where: { id: params.id },
       select: {
-        primaryImage: true, 
-        objectTitle: true, 
+        primaryImage: true,
+        objectTitle: true,
       },
     });
 
-    if (!image) {
+    if (!image?.primaryImage) {
       return NextResponse.json({ error: "Image not found" }, { status: 404 });
     }
 
-    if (!image.primaryImage) {
-      return NextResponse.json(
-        { error: "No image URL found" },
-        { status: 404 }
-      );
-    }
-    const imageResponse = await fetch(image.primaryImage);
-    const imageBlob = await imageResponse.blob();
+    const response = await fetch(image.primaryImage);
+    const blob = await response.blob();
 
-    const headers = new Headers();
-    headers.set(
-      "Content-Disposition",
-      `from-data; filename="${image.objectTitle}.jpg"`
-    );
-    headers.set("Content-Type", "image/jpeg");
-
-    return new NextResponse(imageBlob, {
-      headers,
-      status: 200,
+    return new NextResponse(blob, {
+      headers: {
+        "Content-Type": response.headers.get("Content-Type") || "image/jpeg",
+        "Content-Disposition": `attachment; filename="${
+          image.objectTitle || "image"
+        }.jpg"`,
+      },
     });
   } catch (error) {
     console.error("Download error:", error);
-    return NextResponse.json({ error: "Download failed" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
