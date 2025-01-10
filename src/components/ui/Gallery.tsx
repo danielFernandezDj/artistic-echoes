@@ -1,19 +1,48 @@
-"use server";
+"use client";
 
-import { prisma } from "@/lib/prisma";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import { ImageDown } from "lucide-react";
 
-export default async function GalleryPage() {
-  const images = await prisma.imageStock.findMany({
-    select: {
-        id: true,
-        objectTitle: true,
-        primaryImage: true,
-        primaryImageSmall: true,
-    }
-  })
+interface ImageStock {
+  id: string;
+  objectTitle: string;
+  primaryImage: string;
+  primaryImageSmall: string;
+}
 
-  console.log('Fetching all images', images);
+export default function GalleryPage() {
+  const [images, setImages] = useState<ImageStock[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    async function fetchImages(): Promise<void> {
+      try {
+        const response = await fetch('/api/images');
+        const data = await response.json();
+        setImages(data);
+
+        console.log('Images loaded:', data)
+      } catch (error) {
+        console.error("Error fetching images:", error);
+
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchImages();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="container mx-auto p-4">
+        <div className="grid place-items-center h-screen">
+          <div className="animate-pulse">Loading gallery...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -35,8 +64,11 @@ export default async function GalleryPage() {
             </div>
 
             {image.primaryImageSmall && (
-              <img
+              <Image
                 src={image.primaryImageSmall}
+                alt={image.objectTitle}
+                width={500}
+                height={300}
                 className="w-full transition-all duration-200 ease-in-out"
               />
             )}

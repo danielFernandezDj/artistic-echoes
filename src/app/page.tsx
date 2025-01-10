@@ -1,6 +1,6 @@
 import GalleryPage from '@/components/ui/Gallery'
 
-export default function Explore() {
+export default async function Explore() {
   return (
     <div>
       <main className="flex flex-col w-auto h-screen">
