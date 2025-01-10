@@ -15,22 +15,27 @@ export default function GalleryPage() {
   const [images, setImages] = useState<ImageStock[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    async function fetchImages(): Promise<void> {
-      try {
-        const response = await fetch('/api/images');
-        const data = await response.json();
-        setImages(data);
 
-        console.log('Images loaded:', data)
-      } catch (error) {
-        console.error("Error fetching images:", error);
-
-      } finally {
-        setLoading(false);
+  const fetchImages = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/images');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch images: ${response.status}`);
       }
-    }
+      const data = await response.json();
+      setImages(data);
 
+      console.log('Images loaded:', data)
+    } catch (error) {
+      console.error("Error fetching images:", error);
+
+    } finally {
+      setLoading(false);
+    }
+  }
+  
+  useEffect(() => {
     fetchImages();
   }, []);
 
