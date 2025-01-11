@@ -34,7 +34,7 @@ export default function GalleryPage() {
       setLoading(false);
     }
   }
-  
+
   useEffect(() => {
     fetchImages();
   }, []);
@@ -51,9 +51,9 @@ export default function GalleryPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-8 ">
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-16 ">
         {images.map((image, index) => (
-          <div key={index} className="relative my-8 group">
+          <div key={index} className="relative mb-24 group">
             <span className="cursor-zoom-in absolute top-0 left-0 w-full h-full image-gradient opacity-0 group-hover:opacity-100" />
             <div className="z-10 absolute top-2  p-2 left-2 opacity-0 group-hover:opacity-100 pointer-events-none select-none">
               <h2 className="text-xl text-center font-bold text-slate-50 rounded-md">
@@ -67,15 +67,17 @@ export default function GalleryPage() {
                 <ImageDown className="w-8 h-auto cursor-pointer text-slate-50" />
               </a>
             </div>
-
             {image.primaryImageSmall && (
-              <Image
-                src={image.primaryImageSmall}
-                alt={image.objectTitle}
-                width={500}
-                height={300}
-                className="w-full transition-all duration-200 ease-in-out"
-              />
+              <div>
+                <Image
+                  src={image.primaryImageSmall}
+                  alt={image.objectTitle}
+                  width={100}
+                  height={100}
+                  className="w-full h-auto transition-all duration-200 ease-in-out"
+                />
+                <div className="w-full h-full absolute top-0 right-0 border-8 border-black"></div>
+              </div>
             )}
           </div>
         ))}
