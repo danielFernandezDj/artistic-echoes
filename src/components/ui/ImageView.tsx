@@ -1,19 +1,53 @@
 "use client";
 
+import React from "react";
 import Container from "../layout/Container";
 import Image from "next/image";
-import 
+import { X } from "lucide-react";
+import { ImageStock } from "@/lib/types";
 
+interface ImageViewProps {
+    imageView: boolean;
+    setImageView: React.Dispatch<React.SetStateAction<boolean>>;
+    selectedImage: ImageStock | null;
+    setSelectedImage: React.Dispatch<React.SetStateAction<ImageStock | null>>;
+    image: ImageStock;
+}
 
-export default function ImageView () {
+const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selectedImage, setSelectedImage }) => {
+    if (!imageView || !selectedImage) return null;
 
+    const handleClose = () => {
+        setImageView(false);
+        setSelectedImage(null)
+    }
 
     return (
-        <Container>
-           
+        <Container
+            size="full"
+            className="relative bg-white p-4"
+        >
+            <button
+                className="absolute top-4 right-4 text-red-500"
+                onClick={handleClose}
+            >
+                <X size={24} />
+            </button>
             <div>
-
+                <Image
+                    src={selectedImage.primaryImage}
+                    alt={selectedImage.objectTitle}
+                    width={300}
+                    height={300}
+                />
+                <h2 className="mt-4 text-xl font-bold">{selectedImage.objectTitle}</h2>
+                <p className="mt-2 text-sm text-gray-500">{selectedImage.artistName}</p>
+                <p className="text-sm text-gray-500">{selectedImage.objectDate}</p>
+                <p className="text-sm text-gray-500">{selectedImage.dimensions}</p>
+                <p className="text-sm text-gray-500">{selectedImage.repository}</p>
             </div>
         </Container>
     )
 }
+
+export default ImageView;
