@@ -25,10 +25,11 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     return (
         <Container
             size="full"
-            className="relative bg-white p-4"
+            className="flex justify-center items-center bg-gray-900/30 p-4 z-10 w-full h-full | border-2 border-red-500"
+            position="absolute"
         >
             <button
-                className="absolute top-4 right-4 text-red-500"
+                className="absolute top-4 left-4 text-red-500"
                 onClick={handleClose}
             >
                 <X size={24} />
@@ -39,6 +40,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                     alt={selectedImage.objectTitle}
                     width={300}
                     height={300}
+                    className=""
                 />
                 <h2 className="mt-4 text-xl font-bold">{selectedImage.objectTitle}</h2>
                 <p className="mt-2 text-sm text-gray-500">{selectedImage.artistName}</p>
