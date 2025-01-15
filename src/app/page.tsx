@@ -1,5 +1,4 @@
 import GalleryPage from '@/components/ui/Gallery'
-// git add .; git commit -m '  '; git push origin 
 
 const Explore: React.FC = (() => {
   return (
