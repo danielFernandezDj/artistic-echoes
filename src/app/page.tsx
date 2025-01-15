@@ -4,15 +4,12 @@ import GalleryPage from '@/components/ui/Gallery'
 const Explore: React.FC = (() => {
   return (
     <div>
-      <main className="flex flex-col w-full h-auto | border-2 border-blue-500 "  >
-        {/* <section className="flex flex-col justify-center items-center w-svh w-full h-[30rem] py-10 text-center">
-          <h1 className="font-bold text-[min(15vw,280px)] text-gradient leading-none">
-            Free painting!
+      <main className="flex flex-col w-full h-auto">
+        <section className="flex flex-col justify-center items-center w-svh w-full h-[30rem] text-center">
+          <h1 className="font-bold text-9xl text-gradient leading-none">
+            Print your Favorite!
           </h1>
-          <h2 className="font-medium lg:text-[min(5vw,55px)] text-gradient m-auto max-w-screen-xl">
-            Print your favorite Paint and hang it on your wall!
-          </h2>
-        </section> */}
+        </section>
 
         <GalleryPage />
       </main>
