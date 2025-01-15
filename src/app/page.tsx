@@ -4,7 +4,7 @@ import GalleryPage from '@/components/ui/Gallery'
 const Explore: React.FC = (() => {
   return (
     <div>
-      <main className="flex flex-col w-full h-screen | border-2 border-blue-500 "  >
+      <main className="flex flex-col w-full h-auto | border-2 border-blue-500 "  >
         {/* <section className="flex flex-col justify-center items-center w-svh w-full h-[30rem] py-10 text-center">
           <h1 className="font-bold text-[min(15vw,280px)] text-gradient leading-none">
             Free painting!
