@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "../layout/Container";
 import Image from "next/image";
 import { X } from "lucide-react";
@@ -15,6 +15,18 @@ interface ImageViewProps {
 }
 
 const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selectedImage, setSelectedImage }) => {
+    useEffect(() => {
+        if (imageView) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto'
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto'
+        }
+    }, [imageView])
+
     if (!imageView || !selectedImage) return null;
 
     const handleClose = () => {
@@ -22,10 +34,12 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
         setSelectedImage(null)
     }
 
+
+
     return (
         <Container
             size="full"
-            className="flex justify-center items-center  top-0 left-0 bg-gray-900/30 p-4 z-10 w-full h-full | border-2 border-red-500"
+            className="flex justify-center items-center z-50 top-0 left-0 bg-gray-900/30 p-4 w-full h-full | border-2 border-red-500"
             position="absolute"
         >
             <button
