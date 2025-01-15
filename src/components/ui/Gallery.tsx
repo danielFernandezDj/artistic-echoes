@@ -46,7 +46,7 @@ const Gallery: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto p-4 | border-2 border-red-500">
+    <div className="container mx-auto p-4 overflow-auto | border-2 border-red-500">
       {imageView && selectedImage && (
         <ImageView
           imageView={imageView}
