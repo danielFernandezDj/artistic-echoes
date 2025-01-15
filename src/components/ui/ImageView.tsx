@@ -25,7 +25,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     return (
         <Container
             size="full"
-            className="flex justify-center items-center bg-gray-900/30 p-4 z-10 w-full h-full | border-2 border-red-500"
+            className="flex justify-center items-center  top-0 left-0 bg-gray-900/30 p-4 z-10 w-full h-full | border-2 border-red-500"
             position="absolute"
         >
             <button
