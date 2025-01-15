@@ -1,6 +1,7 @@
 import GalleryPage from '@/components/ui/Gallery'
+// git add .; git commit -m '  '; git push origin 
 
-export default async function Explore() {
+const Explore: React.FC = (() => {
   return (
     <div>
       <main className="flex flex-col w-auto h-screen">
@@ -17,4 +18,6 @@ export default async function Explore() {
       </main>
     </div>
   );
-}
+})
+
+export default Explore;

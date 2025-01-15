@@ -8,6 +8,7 @@ interface ContainerProps {
   as?: keyof JSX.IntrinsicElements;
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
   padding?: 'none' | 'sm' | 'md' | 'lg';
+  position?: 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky';
 }
 
 const Container: React.FC<ContainerProps> = ({
@@ -16,6 +17,7 @@ const Container: React.FC<ContainerProps> = ({
   as: Component = 'div',
   size = 'lg',
   padding = 'md',
+  position = 'absolute'
 }) => {
   const maxWidthClasses = {
     sm: 'max-w-3xl',
@@ -24,6 +26,14 @@ const Container: React.FC<ContainerProps> = ({
     xl: 'max-w-screen-2xl',
     full: 'max-w-full',
   };
+
+  const positionClasses = {
+    static: 'static',
+    fixed: 'fixed',
+    absolute: 'absolute',
+    relative: 'relative',
+    sticky: 'sticky'
+  }
 
   const paddingClasses = {
     none: 'px-0',
@@ -37,6 +47,7 @@ const Container: React.FC<ContainerProps> = ({
     w-full
     ${maxWidthClasses[size]}
     ${paddingClasses[padding]}
+    ${positionClasses[position]}
     ${className}
   `.trim();
 
