@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import Container from "../layout/Container";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { ImageDown, X } from "lucide-react";
 import { ImageStock } from "@/lib/types";
 
 interface ImageViewProps {
@@ -39,29 +39,46 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     return (
         <Container
             size="full"
-            className="insert-10 flex justify-center items-center h-screen z-50 bg-gray-900/30 p-4"
+            className="insert-0 flex justify-center h-screen z-50 bg-black/80 p-4"
             position="fixed"
         >
-            <button
-                className="absolute top-4 left-4 text-red-500"
-                onClick={handleClose}
+            <Container
+                size="lg"
+                position="static"
+                className="flex flex-col items-center gap-4 pt-8 mt-2 rounded-xl overflow-scroll bg-white"
             >
-                <X size={24} />
-            </button>
-            <div className="">
-                <Image
-                    src={selectedImage.primaryImage}
-                    alt={selectedImage.objectTitle}
-                    width={300}
-                    height={300}
-                    className=""
-                />
-                <h2 className="mt-4 text-xl font-bold">{selectedImage.objectTitle}</h2>
-                <p className="mt-2 text-sm text-gray-500">{selectedImage.artistName}</p>
-                <p className="text-sm text-gray-500">{selectedImage.objectDate}</p>
-                <p className="text-sm text-gray-500">{selectedImage.dimensions}</p>
-                <p className="text-sm text-gray-500">{selectedImage.repository}</p>
-            </div>
+                <div className="flex justify-between w-full h-auto m-auto">
+                    <button
+                        className="text-red-500 hover:rotate-90 transition ease-in-out duration-300"
+                        onClick={handleClose}
+                    >
+                        <X size={32} />
+                    </button>
+                    <button
+                        className="flex gap-2 items-center p-2 font-bold rounded-md text-slate-950 border-2 border-slate-950"
+                    >
+                        Download
+                        <ImageDown size={28} />
+                    </button>
+                </div>
+                <div className="flex flex-col justify-center items-center gap-4 w-full">
+                    <Image
+                        src={selectedImage.primaryImageSmall}
+                        alt={selectedImage.objectTitle}
+                        width={600}
+                        height={400}
+                        className="border-2 p-2 bg-black/5 border-black"
+                    />
+                    <p className="mt-4 text-xl font-bold">Dimension: {selectedImage.dimensions}</p>
+
+                    <div className="flex flex-col justify-start text-slate-950 w-full h-full mb-20 p-4 bg-black/5 rounded-xl">
+                        <h2 className="mt-4 text-xl font-bold">{selectedImage.objectTitle}</h2>
+                        <p className="mt-4 text-xl font-bold">ArtistName: {selectedImage.artistName}</p>
+                        <p className="mt-4 text-xl font-bold">Title: {selectedImage.objectDate}</p>
+                        <p className="mt-4 text-xl font-bold">Repo: {selectedImage.repository}</p>
+                    </div>
+                </div>
+            </Container>
         </Container>
     )
 }

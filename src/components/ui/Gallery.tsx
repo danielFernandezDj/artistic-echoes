@@ -67,7 +67,6 @@ const Gallery: React.FC = () => {
               }}
               className="relative mb-8 group"
             >
-
               <span className="cursor-zoom-in absolute w-full h-full bg-slate-900/30 opacity-0 group-hover:opacity-100" />
               <div className="z-10 absolute top-2  p-2 left-2 opacity-0 group-hover:opacity-100 pointer-events-none select-none">
                 <h2 className="text-xl text-center font-bold text-slate-50 rounded-md">
@@ -76,7 +75,7 @@ const Gallery: React.FC = () => {
                     : image.objectTitle}
                 </h2>
               </div>
-              <div className="z-10 absolute top-2  p-2  right-2 opacity-0 group-hover:opacity-100">
+              <div className="z-10 absolute top-2 p-2 right-2 opacity-0 group-hover:opacity-100">
                 <a href={`/api/download/${image.id}`} download>
                   <ImageDown className="w-8 h-auto cursor-pointer text-slate-50" />
                 </a>
