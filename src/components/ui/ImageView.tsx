@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import Container from "../layout/Container";
-import Image from "next/image";
+import Image from "../layout/Image";
 import { ImageDown, X } from "lucide-react";
 import { ImageStock } from "@/lib/types";
 
@@ -52,12 +52,13 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                     >
                         <X size={32} />
                     </button>
-                    <button
+                    <a
+                        href={`/api/download/${selectedImage.id}`} download
                         className="flex gap-2 items-center p-2 font-bold rounded-md text-slate-950 border-2 border-slate-950"
                     >
                         Download
                         <ImageDown size={28} />
-                    </button>
+                    </a>
                 </div>
                 <Container
                     size="full"
@@ -65,13 +66,14 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                     className="flex flex-wrap justify-center gap-4 w-full p-4 overflow-scroll"
                 >
                     <Image
-                        src={selectedImage.primaryImageSmall}
+                        src={selectedImage.primaryImage}
                         alt={selectedImage.objectTitle}
-                        width={700}
-                        height={100}
+                        width={400}
+                        height={400}
+                        skeletonClassName="bg-gray-300"
                         className="border-2 p-2 bg-black/10 border-black"
-                    />
 
+                    />
                     <p className="w-full text-center text-xl text-slate-950/50">Dimension: {selectedImage.dimensions}</p>
 
                     <div className="flex flex-col justify-start text-slate-950 w-full h-full mb-20 p-4 bg-black/5 rounded-xl">
