@@ -99,9 +99,17 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
-              Donation
-            </button>
+            <div className='flex gap-4'>
+              <button
+                className="text-magenta-color font-mono rounded-md text-sm font-bold hover:text-orange-color transition-colors"
+              >
+                Donate⤴︎
+              </button>
+              <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
+                Sign In
+              </button>
+            </div>
+
           </div>
 
           {/* Mobile menu button */}
@@ -128,15 +136,20 @@ const Navbar = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className={`block px-3 py-2 rounded-md text-base font-mono font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 ${currentPath === item.href
-                  ? 'text-gray-900 bg-gray-100'
+                className={`block px-3 py-2 rounded-md text-base font-mono font-medium ${currentPath === item.href
+                  ? 'text-slate-50 bg-orange-color'
                   : 'hover:bg-gray-100'
                   }`}
               >
                 {item.label}
               </a>
             ))}
-            <button className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition-colors">
+            <button
+              className="text-magenta-color font-mono px-3 py-2 rounded-md text-sm font-bold hover:text-orange-color transition-colors"
+            >
+              Donate⤴︎
+            </button>
+            <button className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-mono font-medium hover:bg-blue-700 transition-colors">
               Sign In
             </button>
           </div>
