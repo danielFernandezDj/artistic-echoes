@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
 import Image from 'next/image'
 
 interface NavItem {
@@ -66,19 +67,6 @@ const Navbar = () => {
     return () => window.removeEventListener('popstate', handlePathChange)
   }, [])
 
-  const sanitizeUrl = (url: string): string => {
-    const cleaned = url.replace(/[^\w-/]/g, '');
-    return cleaned.startsWith('/') ? cleaned : `/${cleaned}`;
-  };
-
-  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const sanitizedUrl = sanitizeUrl(href);
-    window.history.pushState({}, '', sanitizedUrl);
-    setCurrentPath(sanitizedUrl);
-    setIsOpen(false);
-  };
-
   return (
     <nav className={`sticky top-0 z-50 bg-transparent navbar-custom-dashed-border transitionAll border-gray-200 
         ${useScrolling() ? 'bg-white shadow-lg' : ''} 
@@ -109,7 +97,6 @@ const Navbar = () => {
                   }`}
                 aria-current={currentPath === item.href ? 'page' : undefined}
                 aria-label={item.label}
-                onClick={(e) => handleNavigation(e, item.href)}
               >
                 {item.label}
               </a>
