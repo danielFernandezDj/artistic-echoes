@@ -7,13 +7,14 @@ import Image from 'next/image'
 interface NavItem {
   label: string;
   href: string;
+  id: string;
 }
 
 const navigation: NavItem[] = [
-  { label: 'Explore', href: '/' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'About', href: '/about' },
-  { label: 'License', href: '/license' },
+  { label: 'Explore', href: '/', id: 'nav-home' },
+  { label: 'Contact', href: '/contact', id: 'nav-contact' },
+  { label: 'About', href: '/about', id: 'nav-about' },
+  { label: 'License', href: '/license', id: 'nav-license' },
 ];
 
 const useScrolling = () => {
@@ -39,9 +40,47 @@ const useScrolling = () => {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentPath, setCurrentPath] = useState('')
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname)
+
+    const handlePathChange = (() => {
+      setIsOpen(false)
+      setCurrentPath(window.location.pathname);
+    })
+
+    window.addEventListener('popstate', handlePathChange)
+    return () => window.removeEventListener('popstate', handlePathChange)
+  }, [])
+
+  const sanitizeUrl = (url: string): string => {
+    const cleaned = url.replace(/[^\w-/]/g, '');
+    return cleaned.startsWith('/') ? cleaned : `/${cleaned}`;
+  };
+
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const sanitizedUrl = sanitizeUrl(href);
+    window.history.pushState({}, '', sanitizedUrl);
+    setCurrentPath(sanitizedUrl);
+    setIsOpen(false);
+  };
 
   return (
-    <nav className={`sticky top-0 z-50 bg-transparent navbar-custom-dashed-border border-gray-200 ${useScrolling() ? 'backdrop-blur-xl bg-black/50' : ''}`}>
+    <nav className={`sticky top-0 z-50 bg-transparent navbar-custom-dashed-border transitionAll border-gray-200 ${useScrolling() ? 'bg-white shadow-lg' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
@@ -61,14 +100,30 @@ const Navbar = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-stale-800 hover:bg-slate-200/50 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className={`text-stale-900 text-sm px-3 py-2 font-mono rounded-md font-medium transition-colors ${currentPath === item.href
+                  ? 'text-slate-50 bg-orange-color'
+                  : 'hover:bg-gray-200'
+                  }`}
+                aria-current={currentPath === item.href ? 'page' : undefined}
+                aria-label={item.label}
+                onClick={(e) => handleNavigation(e, item.href)}
               >
                 {item.label}
               </a>
             ))}
-            <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
-              Donation
-            </button>
+            <div className='flex items-center gap-4'>
+              <a
+                href='https://buymeacoffee.com/daniel.tech'
+                target='_blank'
+                className="text-magenta-color cursor-alias font-mono text-sm font-bold hover:text-orange-color transition-colors"
+              >
+                Donate⤴︎
+              </a>
+              <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
+                Sign In
+              </button>
+            </div>
+
           </div>
 
           {/* Mobile menu button */}
@@ -89,18 +144,26 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden ">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white">
             {navigation.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                className={`block px-3 py-2 rounded-md text-base font-mono font-medium ${currentPath === item.href
+                  ? 'text-slate-50 bg-orange-color'
+                  : 'hover:bg-gray-100'
+                  }`}
               >
                 {item.label}
               </a>
             ))}
-            <button className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 transition-colors">
+            <button
+              className="text-magenta-color font-mono px-3 py-2 rounded-md text-sm font-bold hover:text-orange-color transition-colors"
+            >
+              Donate⤴︎
+            </button>
+            <button className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-mono font-medium hover:bg-blue-700 transition-colors">
               Sign In
             </button>
           </div>
