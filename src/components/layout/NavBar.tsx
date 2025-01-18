@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image'
-import Link from 'next/link';
 
 interface NavItem {
   label: string;
@@ -42,6 +41,18 @@ const useScrolling = () => {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState('')
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [isOpen])
 
   useEffect(() => {
     setCurrentPath(window.location.pathname)
@@ -101,13 +112,13 @@ const Navbar = () => {
               </a>
             ))}
             <div className='flex items-center gap-4'>
-              <Link
+              <a
                 href='https://buymeacoffee.com/daniel.tech'
                 target='_blank'
                 className="text-magenta-color cursor-alias font-mono text-sm font-bold hover:text-orange-color transition-colors"
               >
                 Donate⤴︎
-              </Link>
+              </a>
               <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
                 Sign In
               </button>
@@ -133,7 +144,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden ">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white">
             {navigation.map((item) => (
               <a
