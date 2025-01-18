@@ -91,8 +91,8 @@ const Navbar = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className={`text-stale-900 text-sm px-3 py-2 font-mono rounded-md font-medium transition-colors ${currentPath === item.href
-                  ? 'text-slate-50 bg-orange-color'
+                className={`text-sm px-3 py-2 font-mono rounded-md font-medium transition-colors ${currentPath === item.href
+                  ? 'text-gray-950 bg-gray-200'
                   : 'hover:bg-gray-200'
                   }`}
                 aria-current={currentPath === item.href ? 'page' : undefined}
@@ -134,14 +134,14 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden h-screen  bg-white">
+        <div className="md:hidden h-screen  bg-white transitionAll">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white">
             {navigation.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 className={`block px-3 py-2 rounded-md text-base font-mono font-medium ${currentPath === item.href
-                  ? 'text-slate-50 bg-orange-color'
+                  ? 'text-gray-950 bg-gray-200'
                   : 'hover:bg-gray-100'
                   }`}
               >
