@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "../layout/Container";
 import Image from "../layout/Image";
-import { ImageDown, X } from "lucide-react";
+import { ImageDown, X, Heart } from "lucide-react";
 import { ImageStock } from "@/lib/types";
 
 interface ImageViewProps {
@@ -15,6 +15,8 @@ interface ImageViewProps {
 }
 
 const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selectedImage, setSelectedImage }) => {
+    const [toggleLike, setToggleLike] = useState(false)
+
     useEffect(() => {
         if (imageView) {
             document.body.style.overflow = 'hidden';
@@ -50,15 +52,26 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         className="text-red-500 hover:rotate-90 transition ease-in-out duration-300"
                         onClick={handleClose}
                     >
-                        <X size={32} />
+                        <X size={32}/>
                     </button>
-                    <a
-                        href={`/api/download/${selectedImage.id}`} download
-                        className="flex gap-2 items-center p-2 font-bold rounded-md text-slate-950 border-2 border-slate-950"
-                    >
-                        Download
-                        <ImageDown size={28} />
-                    </a>
+
+                    <div className="flex items-center gap-4">
+                        <a
+                            href="#"
+                            onClick={() => setToggleLike(!toggleLike)}
+                            className="p-2 rounded-md border hover:border-gray-700 hover:bg-gray-100"
+                        >
+
+                            <Heart size={26} className={toggleLike ? 'fill-red-500' : 'fill-none'} />
+                        </a>
+                        <a
+                            href={`/api/download/${selectedImage.id}`} download
+                            className="flex gap-2 items-center p-2 font-bold rounded-md border text-slate-950 hover:border-gray-700 hover:bg-gray-100"
+                        >
+                            Download
+                            <ImageDown size={26} />
+                        </a>
+                    </div>
                 </div>
                 <Container
                     size="full"
