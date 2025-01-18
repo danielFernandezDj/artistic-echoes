@@ -9,8 +9,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* --background: #0a0a0a; */
-    --foreground: #ededed;
+    /* --background: #000000; */
+    /* --foreground: #101010; */
   }
 }
 
@@ -33,7 +33,7 @@ body {
   .image-gradient {
     @apply bg-gradient-to-b from-black/50 via-transparent to-black/10;
   }
-
+  
   .pattern-bg {
     background-image: url("/images/patter-1.png");
     background-repeat: repeat;

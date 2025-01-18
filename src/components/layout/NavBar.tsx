@@ -7,13 +7,14 @@ import Image from 'next/image'
 interface NavItem {
   label: string;
   href: string;
+  id: string;
 }
 
 const navigation: NavItem[] = [
-  { label: 'Explore', href: '/' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'About', href: '/about' },
-  { label: 'License', href: '/license' },
+  { label: 'Explore', href: '/', id: 'nav-home' },
+  { label: 'Contact', href: '/contact', id: 'nav-contact' },
+  { label: 'About', href: '/about', id: 'nav-about' },
+  { label: 'License', href: '/license', id: 'nav-license' },
 ];
 
 const useScrolling = () => {
@@ -39,6 +40,32 @@ const useScrolling = () => {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentPath, setCurrentPath] = useState('')
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname)
+
+    const handlePathChange = (() => {
+      setIsOpen(false)
+      setCurrentPath(window.location.pathname);
+    })
+
+    window.addEventListener('popstate', handlePathChange)
+    return () => window.removeEventListener('popstate', handlePathChange)
+  }, [])
+
+  const sanitizeUrl = (url: string): string => {
+    const cleaned = url.replace(/[^\w-/]/g, '');
+    return cleaned.startsWith('/') ? cleaned : `/${cleaned}`;
+  };
+
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const sanitizedUrl = sanitizeUrl(href);
+    window.history.pushState({}, '', sanitizedUrl);
+    setCurrentPath(sanitizedUrl);
+    setIsOpen(false);
+  };
 
   return (
     <nav className={`sticky top-0 z-50 bg-transparent navbar-custom-dashed-border transitionAll border-gray-200 ${useScrolling() ? 'bg-white shadow-lg' : ''}`}>
@@ -61,12 +88,18 @@ const Navbar = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-stale-800 hover:bg-slate-200/50 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className={`text-stale-900 text-sm px-3 py-2 font-mono rounded-md font-medium transition-colors ${currentPath === item.href
+                  ? 'text-slate-50 bg-orange-color'
+                  : 'hover:bg-gray-200'
+                  }`}
+                aria-current={currentPath === item.href ? 'page' : undefined}
+                aria-label={item.label}
+                onClick={(e) => handleNavigation(e, item.href)}
               >
                 {item.label}
               </a>
             ))}
-            <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
+            <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
               Donation
             </button>
           </div>
@@ -95,7 +128,10 @@ const Navbar = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                className={`block px-3 py-2 rounded-md text-base font-mono font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 ${currentPath === item.href
+                  ? 'text-gray-900 bg-gray-100'
+                  : 'hover:bg-gray-100'
+                  }`}
               >
                 {item.label}
               </a>
