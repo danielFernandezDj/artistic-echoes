@@ -104,7 +104,7 @@ const Navbar = () => {
               <a
                 href='https://buymeacoffee.com/daniel.tech'
                 target='_blank'
-                className="text-magenta-color cursor-alias font-mono text-base font-bold hover:text-orange-color transition-colors"
+                className="text-magenta-color cursor-alias font-mono text-base font-bold"
               >
                 Donate⤴︎
               </a>
@@ -151,7 +151,7 @@ const Navbar = () => {
               <a
                 href='https://buymeacoffee.com/daniel.tech'
                 target='_blank'
-                className="text-magenta-color font-mono px-3 py-2 rounded-md text-base font-bold hover:text-orange-color transition-colors"
+                className="text-magenta-color font-mono px-3 py-2 rounded-md text-base font-bold"
               >
                 Donate⤴︎
               </a>
