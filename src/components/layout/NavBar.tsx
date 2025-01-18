@@ -80,7 +80,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`sticky top-0 z-50 bg-transparent navbar-custom-dashed-border transitionAll border-gray-200 ${useScrolling() ? 'bg-white shadow-lg' : ''}`}>
+    <nav className={`sticky top-0 z-50 bg-transparent navbar-custom-dashed-border transitionAll border-gray-200 
+        ${useScrolling() ? 'bg-white shadow-lg' : ''} 
+        ${isOpen ? 'bg-white shadow-lg' : '' }
+    `}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
@@ -144,7 +147,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden ">
+        <div className="md:hidden h-screen  bg-white">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white">
             {navigation.map((item) => (
               <a
