@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image'
+import Link from 'next/link';
 
 interface NavItem {
   label: string;
@@ -99,12 +100,14 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <div className='flex gap-4'>
-              <button
-                className="text-magenta-color font-mono rounded-md text-sm font-bold hover:text-orange-color transition-colors"
+            <div className='flex items-center gap-4'>
+              <Link
+                href='https://buymeacoffee.com/daniel.tech'
+                target='_blank'
+                className="text-magenta-color cursor-alias font-mono text-sm font-bold hover:text-orange-color transition-colors"
               >
                 Donate⤴︎
-              </button>
+              </Link>
               <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
                 Sign In
               </button>
