@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    /* --background: #0a0a0a; */
     --foreground: #ededed;
   }
 }
@@ -27,7 +27,7 @@ body {
   }
 
   .image-gradient {
-    @apply bg-gradient-to-b from-black/50 via-transparent  to-black/10;
+    @apply bg-gradient-to-b from-black/50 via-transparent to-black/10;
   }
 
   .pattern-bg {
@@ -39,8 +39,7 @@ body {
 
 .navbar-custom-dashed-border {
   border-bottom: 1px dashed rgb(219, 74, 22);
-  border-image: repeating-linear-gradient(
-      to right,
+  border-image: repeating-linear-gradient(to right,
       #d45b2b 0%,
       #d45b2b 6px,
       transparent 0px,
@@ -48,7 +47,17 @@ body {
       black 0px,
       black 6px,
       transparent 0px,
-      transparent 8px
-    )
-    1 stretch;
+      transparent 8px) 1 stretch;
+}
+
+.custom-dashed-border {
+  border-bottom: 1px dashed rgb(219, 74, 22);
+  border-image: repeating-linear-gradient(#d45b2b 0%,
+      #d45b2b 6px,
+      transparent 0px,
+      transparent 15px,
+      black 0px,
+      black 6px,
+      transparent 0px,
+      transparent 8px) 1 stretch;
 }

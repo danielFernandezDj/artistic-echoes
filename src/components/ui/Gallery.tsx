@@ -1,41 +1,37 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ImageDown } from "lucide-react";
+import ImageView from "./ImageView"
+import { ImageStock } from "@/lib/types";
 
-interface ImageStock {
-  id: string;
-  objectTitle: string;
-  primaryImage: string;
-  primaryImageSmall: string;
-}
-
-export default function GalleryPage() {
+const Gallery: React.FC = () => {
   const [images, setImages] = useState<ImageStock[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [imageView, setImageView] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<ImageStock | null>(null);
 
-
-  const fetchImages = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch('/api/images');
-      if (!response.ok) {
-        throw new Error(`Failed to fetch images: ${response.status}`);
-      }
-      const data = await response.json();
-      setImages(data);
-
-      console.log('Images loaded:', data)
-    } catch (error) {
-      console.error("Error fetching images:", error);
-
-    } finally {
-      setLoading(false);
-    }
-  }
-  
   useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/images');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch images: ${response.status}`);
+        }
+        const data = await response.json();
+        setImages(data);
+
+        console.log('Images loaded:', data)
+      } catch (error) {
+        console.error("Error fetching images:", error);
+
+      } finally {
+        setLoading(false);
+      }
+    }
+
     fetchImages();
   }, []);
 
@@ -43,43 +39,64 @@ export default function GalleryPage() {
     return (
       <div className="container mx-auto p-4">
         <div className="grid place-items-center h-screen">
-          <div className="animate-pulse">Loading gallery...</div>
+          <p className="animate-pulse text-2xl p-2 bg-black rounded-md">Loading gallery...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-8 ">
-        {images.map((image, index) => (
-          <div key={index} className="relative my-8 group">
-            <span className="cursor-zoom-in absolute top-0 left-0 w-full h-full image-gradient opacity-0 group-hover:opacity-100" />
-            <div className="z-10 absolute top-2  p-2 left-2 opacity-0 group-hover:opacity-100 pointer-events-none select-none">
-              <h2 className="text-xl text-center font-bold text-slate-50 rounded-md">
-                {image.objectTitle.length > 25
-                  ? `${image.objectTitle.substring(0, 20)}...`
-                  : image.objectTitle}
-              </h2>
+    <>
+      {imageView && selectedImage && (
+        <ImageView
+          imageView={imageView}
+          setImageView={setImageView}
+          selectedImage={selectedImage}
+          setSelectedImage={setSelectedImage}
+          image={selectedImage}
+        />
+      )}
+      <div className="w-full h-auto m-auto px-16">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 ">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                setSelectedImage(image)
+                setImageView(true)
+              }}
+              className="relative mb-8 group"
+            >
+              <span className="cursor-zoom-in absolute w-full h-full bg-slate-900/30 opacity-0 group-hover:opacity-100" />
+              <div className="z-10 absolute top-2  p-2 left-2 opacity-0 group-hover:opacity-100 pointer-events-none select-none">
+                <h2 className="text-xl text-center font-bold text-slate-50 rounded-md">
+                  {image.objectTitle.length > 25
+                    ? `${image.objectTitle.substring(0, 20)}...`
+                    : image.objectTitle}
+                </h2>
+              </div>
+              <div className="z-10 absolute top-2 p-2 right-2 opacity-0 group-hover:opacity-100">
+                <a href={`/api/download/${image.id}`} download>
+                  <ImageDown className="w-8 h-auto cursor-pointer text-slate-50" />
+                </a>
+              </div>
+              {image.primaryImageSmall && (
+                <div>
+                  <Image
+                    src={image.primaryImageSmall}
+                    alt={image.objectTitle}
+                    width={100}
+                    height={100}
+                    className="w-full h-auto transition-all duration-200 ease-in-out border-8"
+                  />
+                </div>
+              )}
             </div>
-            <div className="z-10 absolute top-2  p-2  right-2 opacity-0 group-hover:opacity-100">
-              <a href={`/api/download/${image.id}`} download>
-                <ImageDown className="w-8 h-auto cursor-pointer text-slate-50" />
-              </a>
-            </div>
-
-            {image.primaryImageSmall && (
-              <Image
-                src={image.primaryImageSmall}
-                alt={image.objectTitle}
-                width={500}
-                height={300}
-                className="w-full transition-all duration-200 ease-in-out"
-              />
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
+
+export default Gallery;
