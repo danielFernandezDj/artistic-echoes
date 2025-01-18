@@ -70,7 +70,7 @@ const Navbar = () => {
   return (
     <nav className={`sticky top-0 z-50 bg-transparent navbar-custom-dashed-border transitionAll border-gray-200 
         ${useScrolling() ? 'bg-white shadow-lg' : ''} 
-        ${isOpen ? 'bg-white shadow-lg' : '' }
+        ${isOpen ? 'bg-white shadow-lg' : ''}
     `}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
@@ -105,7 +105,7 @@ const Navbar = () => {
               <a
                 href='https://buymeacoffee.com/daniel.tech'
                 target='_blank'
-                className="text-magenta-color cursor-alias font-mono text-sm font-bold hover:text-orange-color transition-colors"
+                className="text-magenta-color cursor-alias font-mono text-base font-bold hover:text-orange-color transition-colors"
               >
                 Donate⤴︎
               </a>
@@ -148,14 +148,18 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <button
-              className="text-magenta-color font-mono px-3 py-2 rounded-md text-sm font-bold hover:text-orange-color transition-colors"
-            >
-              Donate⤴︎
-            </button>
-            <button className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-mono font-medium hover:bg-blue-700 transition-colors">
-              Sign In
-            </button>
+            <div className='flex flex-wrap items-center gap-2'>
+              <a
+                href='https://buymeacoffee.com/daniel.tech'
+                target='_blank'
+                className="text-magenta-color font-mono px-3 py-2 rounded-md text-base font-bold hover:text-orange-color transition-colors"
+              >
+                Donate⤴︎
+              </a>
+              <button className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-mono font-medium hover:bg-blue-700 transition-colors">
+                Sign In
+              </button>
+            </div>
           </div>
         </div>
       )}
