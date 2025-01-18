@@ -26,6 +26,10 @@ body {
     @apply bg-gradient-to-r from-orange-color to-magenta-color bg-clip-text text-transparent;
   }
 
+  .transitionAll {
+    @apply transition ease-in-out duration-300
+  }
+
   .image-gradient {
     @apply bg-gradient-to-b from-black/50 via-transparent to-black/10;
   }

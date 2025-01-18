@@ -41,7 +41,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className={`sticky top-0 z-50 bg-transparent navbar-custom-dashed-border border-gray-200 ${useScrolling() ? 'backdrop-blur-xl bg-black/50' : ''}`}>
+    <nav className={`sticky top-0 z-50 bg-transparent navbar-custom-dashed-border transitionAll border-gray-200 ${useScrolling() ? 'bg-white shadow-lg' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
