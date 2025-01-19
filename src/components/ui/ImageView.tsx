@@ -81,9 +81,6 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                     <Image
                         src={selectedImage.primaryImage}
                         alt={selectedImage.objectTitle}
-                        width={400}
-                        height={400}
-                        skeletonClassName="bg-gray-300"
                         className="border-2 p-2 bg-black/10 border-black"
 
                     />
