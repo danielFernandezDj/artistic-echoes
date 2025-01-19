@@ -52,7 +52,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         className="text-red-500 hover:rotate-90 transition ease-in-out duration-300"
                         onClick={handleClose}
                     >
-                        <X size={32}/>
+                        <X size={32} />
                     </button>
 
                     <div className="flex items-center gap-4">
@@ -81,11 +81,9 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                     <Image
                         src={selectedImage.primaryImage}
                         alt={selectedImage.objectTitle}
-                        className="border-2 p-2 bg-black/10 border-black"
+                        className="max-w-3xl mb-4"
 
                     />
-                    <p className="w-full text-center text-xl text-slate-950/50">Dimension: {selectedImage.dimensions}</p>
-
                     <div className="flex flex-col justify-start text-slate-950 w-full h-full mb-20 p-4 bg-black/5 rounded-xl">
                         <h2 className="mt-4 text-xl font-bold">{selectedImage.objectTitle}</h2>
                         <p className="mt-4 text-xl font-bold">ArtistName: {selectedImage.artistName}</p>
