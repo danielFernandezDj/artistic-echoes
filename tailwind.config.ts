@@ -11,11 +11,10 @@ export default {
       colors: {
         "orange-color": "#D45B2B",
         "magenta-color": "#6625BF",
-        "magenta-hover": "#7e4cc2",
-        "black-color": "#1E1E1E",
+        "magenta-hover": "#521f9b",
       },
     },
   },
   plugins: [],
-  darkMode: "media",
+  // darkMode: "class",
 } satisfies Config;

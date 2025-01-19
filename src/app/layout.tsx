@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "@/components/navigation/NavBar"
+import Navbar from "@/components/layout/NavBar"
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,17 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} dark:bg-zinc-900 antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-auto flex flex-col overflow-auto`}
       >
         <Navbar />
         <main className="flex-grow">
           {children}
         </main>
-        {/* <footer className="flex justify-center items-center w-full h-auto py-5 text-white bg-blue-500">
-          <p>
-            ©2024 All rights reserved - Designed & Coded by Daniel Fernandez
-          </p>
-        </footer> */}
         <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
       </body>
     </html>

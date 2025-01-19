@@ -17,8 +17,13 @@ export async function GET(
     const image = await prisma.imageStock.findUnique({
       where: { id: params.id },
       select: {
-        primaryImage: true,
+        artistName: true,
         objectTitle: true,
+        primaryImage: true,
+        objectDate: true,
+        dimensions: true, 
+        GalleryNumber: true,
+        repository: true,
       },
     });
 
