@@ -1,73 +1,41 @@
 "use client"
 
-import React, { useState } from 'react';
-import NextImage from 'next/image';
+import React, { useState } from "react";
 
 interface ImageProps {
   src: string;
   alt: string;
-  width: number;
-  height: number;
   className?: string;
-  quality?: number;
-  priority?: boolean;
-  loading?: 'lazy' | 'eager';
-  sizes?: string;
-  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
-  skeletonClassName?: string;
 }
 
-const Image: React.FC<ImageProps> = ({
-  src,
-  alt,
-  width,
-  height,
-  className = '',
-  quality = 75,
-  priority = false,
-  loading = 'lazy',
-  sizes,
-  objectFit = 'cover',
-  skeletonClassName = '',
-}) => {
-  const [isLoading, setIsLoading] = useState(!priority);
+const Image: React.FC<ImageProps> = ({ src, alt, className }) => {
+  const [imageSize, setImageSize] = useState<{ width: number; height: number } | null>(null);
 
-  const imageClasses = `
-    transition-opacity duration-300
-    ${isLoading ? 'opacity-0' : 'opacity-100'}
-    ${className}
-  `.trim();
-
-  const skeletonClasses = `
-    absolute 
-    top-0 
-    left-0 
-    w-full 
-    h-full 
-    bg-gray-200 
-    animate-pulse 
-    rounded-md
-    ${skeletonClassName}
-  `.trim();
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const { naturalWidth: width, naturalHeight: height } = event.currentTarget;
+    setImageSize({ width, height });
+  };
 
   return (
-    <div className="relative" style={{ width, height }}>
-      {isLoading && (
-        <div className={skeletonClasses} />
-      )}
-      <NextImage
+    <div className={`relative ${className}`}>
+      {/* Skeleton Loader */}
+      {!imageSize && <div className="skeleton-loader w-full h-full absolute top-0 left-0 bg-gray-300 animate-pulse"></div>}
+
+      {/* Actual Image */}
+      <img
         src={src}
         alt={alt}
-        width={width}
-        height={height}
-        className={imageClasses}
-        quality={quality}
-        priority={priority}
-        loading={loading}
-        sizes={sizes}
-        style={{ objectFit }}
-        onLoadingComplete={() => setIsLoading(false)}
+        onLoad={handleImageLoad}
+        className={`transition-opacity duration-300 ${!imageSize ? "opacity-0" : "opacity-100"}`}
+        style={!imageSize ? { visibility: "hidden" } : {}}
       />
+
+      {/* Display Image Dimensions */}
+      {imageSize && (
+        <p className="mt-2 text-sm text-gray-500">
+          Dimensions: {imageSize.width} x {imageSize.height}px
+        </p>
+      )}
     </div>
   );
 };
