@@ -57,7 +57,7 @@ const Gallery: React.FC = () => {
         />
       )}
       <div className="w-full h-auto m-auto px-16">
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 ">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-16 ">
           {images.map((image, index) => (
             <div
               key={index}
@@ -65,7 +65,7 @@ const Gallery: React.FC = () => {
                 setSelectedImage(image)
                 setImageView(true)
               }}
-              className="relative mb-8 group"
+              className="relative mb-16 group"
             >
               <span className="cursor-zoom-in absolute w-full h-full bg-slate-900/30 opacity-0 group-hover:opacity-100" />
               <div className="z-10 absolute top-2  p-2 left-2 opacity-0 group-hover:opacity-100 pointer-events-none select-none">
