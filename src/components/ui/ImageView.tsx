@@ -83,8 +83,8 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         className="max-w-3xl mb-4"
 
                     />
-                    <div className="flex flex-col justify-start w-full h-80 mb-28 p-4 bg-gray-800/5 font-serif rounded-xl">
-                        <h2 className="mt-4 text-2xl font-bold text-gray-800 underline decoration-1">
+                    <div className="flex flex-col justify-start w-full h-auto mb-28 p-4 bg-gray-800/5 font-serif rounded-xl">
+                        <h2 className="text-2xl font-bold text-gray-800 underline decoration-1">
                             {selectedImage.objectTitle}
                         </h2>
                         <div className="flex flex-col gap-2 mt-2  text-gray-700">
@@ -98,7 +98,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                                     target="_blank"
                                     className="px-2 hover:text-magenta-color hover:underline decoration-1 cursor-alias"
                                 >
-                                    {selectedImage.artistWikidata_URL}.
+                                    Wikidata URL ⤴︎
                                 </a>
                             </p>
                             <p> <span className="font-semibold">Medium: </span> {selectedImage.medium}.</p>
