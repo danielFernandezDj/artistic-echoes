@@ -84,12 +84,35 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
 
                     />
                     <div className="flex flex-col justify-start w-full h-80 mb-28 p-4 bg-gray-800/5 font-serif rounded-xl">
-                        <h2 className="mt-4 text-2xl font-bold text-gray-800">{selectedImage.objectTitle}</h2>
-                        <div className="text-gray-700">
-                            <p className="mt-4 text-lg "><span className="font-serif">Artist Name: </span> {selectedImage.artistName}</p>
-                            <p className="mt-4 text-lg ">Paint Dimensions: {selectedImage.dimensions}</p>
-                            <p className="mt-4 text-lg ">Gallery Number: {selectedImage.GalleryNumber}</p>
-                            <p className="mt-4 text-lg ">Repo: {selectedImage.repository}</p>
+                        <h2 className="mt-4 text-2xl font-bold text-gray-800 underline decoration-1">
+                            {selectedImage.objectTitle}
+                        </h2>
+                        <div className="flex flex-col gap-2 mt-2  text-gray-700">
+                            <p> <span className="font-semibold">Artist Name:</span> {selectedImage.artistName}. </p>
+                            <p>
+                                <span className="font-semibold">
+                                    Artist Wiki:
+                                </span>
+                                <a
+                                    href={selectedImage.artistWikidata_URL}
+                                    target="_blank"
+                                    className="px-2 hover:text-magenta-color hover:underline decoration-1 cursor-alias"
+                                >
+                                    {selectedImage.artistWikidata_URL}.
+                                </a>
+                            </p>
+                            <p> <span className="font-semibold">Medium: </span> {selectedImage.medium}.</p>
+                            <p> <span className="font-semibold">Nationality: </span> {selectedImage.artistNationality}.</p>
+                            <p> <span className="font-semibold">Culture: </span> {selectedImage.culture}.</p>
+                            <p>
+                                <span className="font-semibold">
+                                    Artist Begin & End Date:
+                                </span> {selectedImage.artistBeginDate} to {selectedImage.artistEndDate}.
+                            </p>
+                            <p> <span className="font-semibold">Credit Line: </span> {selectedImage.creditLine}.</p>
+                            <p> <span className="font-semibold">Repo From: </span> {selectedImage.repository}.</p>
+                            <p> <span className="font-semibold">Paint Dimensions: </span> {selectedImage.dimensions}.</p>
+                            <p> <span className="font-semibold">Gallery Num: #</span> {selectedImage.GalleryNumber}.</p>
                         </div>
                     </div>
                 </Container>

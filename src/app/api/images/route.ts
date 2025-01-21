@@ -10,9 +10,18 @@ export async function GET() {
         primaryImageSmall: true,
         objectTitle: true,
         artistName: true,
+        artistWikidata_URL: true,
+        artistDisplayBio: true,
+        artistNationality: true,
+        artistBeginDate: true,
+        artistEndDate: true,
+        culture: true,
+        creditLine: true,
         dimensions: true,
         GalleryNumber: true,
         repository: true,
+        medium: true,
+        constituentWikidata_URL: true,
       },
     });
 
