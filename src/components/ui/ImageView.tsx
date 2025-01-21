@@ -76,7 +76,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                 <Container
                     size="full"
                     position="relative"
-                    className="flex flex-wrap justify-center gap-4 w-full h-full mb-4 p-4 overflow-auto" 
+                    className="flex flex-wrap justify-center gap-4 w-full h-full  mb-4 p-4 overflow-auto" 
                 >
                     <Image
                         src={selectedImage.primaryImage}
@@ -84,7 +84,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         className="max-w-3xl mb-4"
 
                     />
-                    <div className="flex flex-col justify-start text-slate-950 w-full h-auto mb-28 p-4 bg-black/5 rounded-xl">
+                    <div className="flex flex-col justify-start text-slate-950 w-full h-80 mb-28 p-4 bg-black/5 rounded-xl">
                         <h2 className="mt-4 text-xl font-bold">{selectedImage.objectTitle}</h2>
                         <p className="mt-4 text-xl font-bold">ArtistName: {selectedImage.artistName}</p>
                         <p className="mt-4 text-xl font-bold">Title: {selectedImage.objectDate}</p>
