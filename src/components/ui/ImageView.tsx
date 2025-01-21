@@ -11,7 +11,6 @@ interface ImageViewProps {
     setImageView: React.Dispatch<React.SetStateAction<boolean>>;
     selectedImage: ImageStock | null;
     setSelectedImage: React.Dispatch<React.SetStateAction<ImageStock | null>>;
-    image: ImageStock;
 }
 
 const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selectedImage, setSelectedImage }) => {
@@ -45,9 +44,9 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
             <Container
                 size="lg"
                 position="relative"
-                className="flex flex-col items-center gap-4 pt-8 mt-2 rounded-xl  bg-white"
+                className="pt-8 mt-2 rounded-xl bg-white"
             >
-                <div className="static flex justify-between w-full h-auto m-auto">
+                <div className="flex justify-between w-full h-auto m-auto mb-4">
                     <button
                         className="text-red-500 hover:rotate-90 transition ease-in-out duration-300"
                         onClick={handleClose}
@@ -66,7 +65,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         </a>
                         <a
                             href={`/api/download/${selectedImage.id}`} download
-                            className="flex gap-2 items-center p-2 font-bold rounded-md border text-slate-950 hover:border-gray-700 hover:bg-gray-100"
+                            className="flex gap-2 items-center p-2 font-bold rounded-md border text-gray-800 hover:border-gray-700 hover:bg-gray-100"
                         >
                             Download
                             <ImageDown size={26} />
@@ -76,19 +75,44 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                 <Container
                     size="full"
                     position="relative"
-                    className="flex flex-wrap justify-center gap-4 w-full p-4 overflow-scroll"
+                    className="flex flex-wrap justify-center gap-4 w-full h-full  mb-4 p-4 overflow-auto"
                 >
                     <Image
                         src={selectedImage.primaryImage}
                         alt={selectedImage.objectTitle}
                         className="max-w-3xl mb-4"
-
                     />
-                    <div className="flex flex-col justify-start text-slate-950 w-full h-full mb-20 p-4 bg-black/5 rounded-xl">
-                        <h2 className="mt-4 text-xl font-bold">{selectedImage.objectTitle}</h2>
-                        <p className="mt-4 text-xl font-bold">ArtistName: {selectedImage.artistName}</p>
-                        <p className="mt-4 text-xl font-bold">Title: {selectedImage.objectDate}</p>
-                        <p className="mt-4 text-xl font-bold">Repo: {selectedImage.repository}</p>
+                    <div className="flex flex-col justify-start w-full h-auto mb-28 p-4 bg-gray-800/5 font-serif rounded-xl">
+                        <h2 className="text-2xl font-bold text-gray-800 underline decoration-1">
+                            {selectedImage.objectTitle}
+                        </h2>
+                        <div className="flex flex-col gap-2 mt-2  text-gray-700">
+                            <p> <span className="font-semibold">Artist Name:</span> {selectedImage.artistName}. </p>
+                            <p>
+                                <span className="font-semibold">
+                                    Artist Wiki:
+                                </span>
+                                <a
+                                    href={selectedImage.artistWikidata_URL}
+                                    target="_blank"
+                                    className="px-2 hover:text-magenta-color hover:underline decoration-1 cursor-alias"
+                                >
+                                    Wikidata URL ⤴︎
+                                </a>
+                            </p>
+                            <p> <span className="font-semibold">Medium: </span> {selectedImage.medium}.</p>
+                            <p> <span className="font-semibold">Nationality: </span> {selectedImage.artistNationality}.</p>
+                            <p> <span className="font-semibold">Culture: </span> {selectedImage.culture}.</p>
+                            <p>
+                                <span className="font-semibold">
+                                    Artist Begin & End Date:
+                                </span> {selectedImage.artistBeginDate} to {selectedImage.artistEndDate}.
+                            </p>
+                            <p> <span className="font-semibold">Credit Line: </span> {selectedImage.creditLine}.</p>
+                            <p> <span className="font-semibold">Repo From: </span> {selectedImage.repository}.</p>
+                            <p> <span className="font-semibold">Paint Dimensions: </span> {selectedImage.dimensions}.</p>
+                            <p> <span className="font-semibold">Gallery Num: #</span> {selectedImage.GalleryNumber}.</p>
+                        </div>
                     </div>
                 </Container>
             </Container>

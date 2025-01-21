@@ -53,7 +53,6 @@ const Gallery: React.FC = () => {
           setImageView={setImageView}
           selectedImage={selectedImage}
           setSelectedImage={setSelectedImage}
-          image={selectedImage}
         />
       )}
       <div className="w-full h-auto m-auto px-4 md:px-16">
