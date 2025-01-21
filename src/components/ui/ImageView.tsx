@@ -11,7 +11,6 @@ interface ImageViewProps {
     setImageView: React.Dispatch<React.SetStateAction<boolean>>;
     selectedImage: ImageStock | null;
     setSelectedImage: React.Dispatch<React.SetStateAction<ImageStock | null>>;
-    image: ImageStock;
 }
 
 const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selectedImage, setSelectedImage }) => {
@@ -47,7 +46,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                 position="relative"
                 className="pt-8 mt-2 rounded-xl bg-white"
             >
-                <div className="flex justify-between w-full h-auto m-auto">
+                <div className="flex justify-between w-full h-auto m-auto mb-4">
                     <button
                         className="text-red-500 hover:rotate-90 transition ease-in-out duration-300"
                         onClick={handleClose}
@@ -66,7 +65,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         </a>
                         <a
                             href={`/api/download/${selectedImage.id}`} download
-                            className="flex gap-2 items-center p-2 font-bold rounded-md border text-slate-950 hover:border-gray-700 hover:bg-gray-100"
+                            className="flex gap-2 items-center p-2 font-bold rounded-md border text-gray-800 hover:border-gray-700 hover:bg-gray-100"
                         >
                             Download
                             <ImageDown size={26} />
@@ -76,7 +75,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                 <Container
                     size="full"
                     position="relative"
-                    className="flex flex-wrap justify-center gap-4 w-full h-full  mb-4 p-4 overflow-auto" 
+                    className="flex flex-wrap justify-center gap-4 w-full h-full  mb-4 p-4 overflow-auto"
                 >
                     <Image
                         src={selectedImage.primaryImage}
@@ -84,11 +83,14 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         className="max-w-3xl mb-4"
 
                     />
-                    <div className="flex flex-col justify-start text-slate-950 w-full h-80 mb-28 p-4 bg-black/5 rounded-xl">
-                        <h2 className="mt-4 text-xl font-bold">{selectedImage.objectTitle}</h2>
-                        <p className="mt-4 text-xl font-bold">ArtistName: {selectedImage.artistName}</p>
-                        <p className="mt-4 text-xl font-bold">Title: {selectedImage.objectDate}</p>
-                        <p className="mt-4 text-xl font-bold">Repo: {selectedImage.repository}</p>
+                    <div className="flex flex-col justify-start w-full h-80 mb-28 p-4 bg-gray-800/5 font-serif rounded-xl">
+                        <h2 className="mt-4 text-2xl font-bold text-gray-800">{selectedImage.objectTitle}</h2>
+                        <div className="text-gray-700">
+                            <p className="mt-4 text-lg "><span className="font-serif">Artist Name: </span> {selectedImage.artistName}</p>
+                            <p className="mt-4 text-lg ">Paint Dimensions: {selectedImage.dimensions}</p>
+                            <p className="mt-4 text-lg ">Gallery Number: {selectedImage.GalleryNumber}</p>
+                            <p className="mt-4 text-lg ">Repo: {selectedImage.repository}</p>
+                        </div>
                     </div>
                 </Container>
             </Container>

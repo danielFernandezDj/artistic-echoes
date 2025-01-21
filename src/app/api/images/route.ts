@@ -9,6 +9,10 @@ export async function GET() {
         primaryImage: true,
         primaryImageSmall: true,
         objectTitle: true,
+        artistName: true,
+        dimensions: true,
+        GalleryNumber: true,
+        repository: true,
       },
     });
 
