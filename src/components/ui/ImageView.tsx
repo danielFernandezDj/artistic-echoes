@@ -81,7 +81,6 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         src={selectedImage.primaryImage}
                         alt={selectedImage.objectTitle}
                         className="max-w-3xl mb-4"
-
                     />
                     <div className="flex flex-col justify-start w-full h-auto mb-28 p-4 bg-gray-800/5 font-serif rounded-xl">
                         <h2 className="text-2xl font-bold text-gray-800 underline decoration-1">
