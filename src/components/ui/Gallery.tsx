@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ImageDown } from "lucide-react";
 import ImageView from "./ImageView"
-import { ImageStock } from "@/lib/types";
+import { ImageStock } from "@/lib/ImageStockType";
 
 const Gallery: React.FC = () => {
   const [images, setImages] = useState<ImageStock[]>([]);

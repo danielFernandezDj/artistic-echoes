@@ -17,3 +17,4 @@ export interface ImageStock {
   medium: string;
   constituentWikidata_URL: string;
 }
+

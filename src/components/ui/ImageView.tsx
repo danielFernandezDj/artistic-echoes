@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Container from "../layout/Container";
 import Image from "../layout/Image";
 import { ImageDown, X, Heart } from "lucide-react";
-import { ImageStock } from "@/lib/types";
+import { ImageStock } from "@/lib/ImageStockType";
 
 interface ImageViewProps {
     imageView: boolean;
