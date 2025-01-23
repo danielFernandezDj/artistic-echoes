@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/layout/NavBar"
 import "./globals.css";
@@ -28,15 +30,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-auto flex flex-col overflow-auto`}
-      >
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
-      </body>
+      <Theme>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased h-auto flex flex-col overflow-auto`}
+        >
+          <Navbar />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
+        </body>
+      </Theme>
     </html>
   );
 }
