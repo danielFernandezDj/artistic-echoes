@@ -1,16 +1,15 @@
 "use client"
 
-// import React, { useState } from "react"
+import React, { useState } from "react"
 import Container from "@/components/layout/Container"
-// import Link from "next/link"
 
-// interface IsLoginProps = {
+interface IsLoginProps {
+    isLogin: boolean;
+}
 
-// }
 
-
-export default function SignUp() {
-    // const [isLogin, setIsLogin] = useState(false)
+const SignUp: React.FC<IsLoginProps> = () => {
+    const [isLogin, setIsLogin] = useState(false)
 
     return (
         <Container
@@ -18,16 +17,30 @@ export default function SignUp() {
             position="relative"
             className=""
         >
-            <div>
-                <p>Hello world</p>
-            </div>
-            {/* {!isLogin &&
-                <Link
-                    href={}
-                >
+            {!isLogin
+                ? <div>
+                    <p>Signin plz!</p>
+                    <button
+                        onClick={() => setIsLogin(true)}
+                        className="p-4 bg-orange-500"
+                    >
+                        LogIn
+                    </button>
+                </div>
 
-                </Link>
-            } */}
+                : <div>
+                    <p>User logOut</p>
+                    <button
+                        onClick={() => setIsLogin(false)}
+                        className="p-4 bg-orange-500"
+                    >
+                        Close section!
+                    </button>
+                </div>
+            }
+
         </Container>
     )
 }
+
+export default SignUp;
