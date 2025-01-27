@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+"use client"
+
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/layout/NavBar"
+import { SessionProvider } from "next-auth/react"
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,13 +17,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Artistic Echoes",
-  description: "Artistic Echoes is a platform for artists to showcase their work and connect with their audience.",
-  icons: {
-    icon: "/images/icons.svg",
-  }
-};
 
 export default function RootLayout({
   children,
@@ -30,17 +25,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Theme>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased h-auto flex flex-col overflow-auto`}
-        >
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-auto flex flex-col overflow-auto`}
+      >
+        <Theme>
           <Navbar />
           <main className="flex-grow">
-            {children}
+            <SessionProvider>{children}</SessionProvider>
           </main>
           <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
-        </body>
-      </Theme>
+        </Theme>
+      </body>
     </html>
   );
 }
