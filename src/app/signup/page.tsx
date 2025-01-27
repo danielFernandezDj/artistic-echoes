@@ -8,8 +8,6 @@ import Container from "@/components/layout/Container"
 
 
 export default function SignUp() {
-    // const { register, handleSubmit } = useForm()
-    // const [isLogin, setIsLogin] = useState(false)
     const { data: session } = useSession();
 
 
@@ -27,9 +25,10 @@ export default function SignUp() {
                 {!session ? (
                     <div className="flex flex-col bg-white p-8 rounded-lg shadow-md w-96">
                         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-                        <div>
+                        <div className="flex flex-col gap-4 text-center">
                             <p>You are not signed in.</p>
                             <button onClick={() => signIn("github")}>Sign in with GitHub</button>
+                            <button onClick={() => signIn("google")}>Sign in with Google</button>
                         </div>
                     </div>
                 ) : (
