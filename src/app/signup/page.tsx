@@ -1,6 +1,6 @@
 "use client"
 
-// import React, { useState } from "react"
+import React, { useState } from "react"
 import { useSession, signIn, signOut } from "next-auth/react";
 import Footer from "@/components/layout/Footer"
 import Container from "@/components/layout/Container"
@@ -9,7 +9,25 @@ import Container from "@/components/layout/Container"
 
 export default function SignUp() {
     const { data: session } = useSession();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
+    const handleSignIn = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const result = await signIn("credentials", {
+            redirect: false,
+            email,
+            password,
+        });
+
+        if (result?.error) {
+            setError(result.error)
+        } else {
+            window.location.href = "/dashboard";
+        }
+    }
 
     return (
         <Container
@@ -25,10 +43,36 @@ export default function SignUp() {
                 {!session ? (
                     <div className="flex flex-col bg-white p-8 rounded-lg shadow-md w-96">
                         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+                        <form onSubmit={handleSignIn} className="flex flex-col gap-4">
+                            {error && <p className="text-red-500">{error}</p>}
+
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="border p-2"
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="border p-2"
+                            />
+                            <button
+                                type="submit"
+                                className="p-2 bg-blue-500 text-white rounded"
+                            >
+                                Sign In
+                            </button>
+                        </form>
+
+
                         <div className="flex flex-col gap-4 text-center">
                             <p>You are not signed in.</p>
-                            <button onClick={() => signIn("github")}>Sign in with GitHub</button>
                             <button onClick={() => signIn("google")}>Sign in with Google</button>
+                            <button onClick={() => signIn("github")}>Sign in with GitHub</button>
                         </div>
                     </div>
                 ) : (
@@ -42,7 +86,7 @@ export default function SignUp() {
                 )}
             </Container>
 
-            <Footer />
+            {/* <Footer /> */}
         </Container >
     )
 }
