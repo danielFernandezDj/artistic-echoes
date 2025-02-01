@@ -9,15 +9,11 @@ generator client {
 
 model UserAuth {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId    Int       @unique
   email     String    @unique
   password  String    @unique
-  name      String?   
   token     String    @unique
   imagesID  String    
   createdAt DateTime  @default(now())
-  expiresAt DateTime
-  updatedAt DateTime  @updatedAt
 
   @@map("user-authentication")
 }

@@ -68,7 +68,7 @@ export default function SignUp() {
                             </button>
                         </form>
 
-
+                        {/* Auth-Providers */}
                         <div className="flex flex-col gap-4 text-center">
                             <p>You are not signed in.</p>
                             <button onClick={() => signIn("google")}>Sign in with Google</button>
