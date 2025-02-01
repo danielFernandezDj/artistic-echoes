@@ -1,12 +1,7 @@
 export interface UserType {
-  id: number;
-  userId: number;
+  id: string;
   email: string;
   password: string;
-  name: string;
-  token: string;
-  imagesID: number;
+  imagesID: string;
   createdAt: string;
-  expiresAt: string;
-  updatedAt: string;
 }
