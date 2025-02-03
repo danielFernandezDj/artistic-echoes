@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { useSession, signIn, signOut } from "next-auth/react";
-import Footer from "@/components/layout/Footer"
+// import Footer from "@/components/layout/Footer"
 import Container from "@/components/layout/Container"
 // import { useForm } from 'react-hook-form';
 
@@ -45,7 +45,6 @@ export default function SignUp() {
                         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
                         <form onSubmit={handleSignIn} className="flex flex-col gap-4">
                             {error && <p className="text-red-500">{error}</p>}
-
                             <input
                                 type="email"
                                 placeholder="Email"

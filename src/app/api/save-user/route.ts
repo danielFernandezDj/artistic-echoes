@@ -14,17 +14,19 @@ export async function POST() {
     }
 
     // Check if user already exists in DB
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma.userAuth.findUnique({
       where: { email: session.user.email },
     });
 
     if (!existingUser) {
       // Insert new user
-      await prisma.user.create({
+      await prisma.userAuth.create({
         data: {
-          email: session.user.email,
-          createdAt: new Date(),
-        },
+            email: session.user.email,
+            createdAt: new Date(),
+            password: "", 
+            imagesID: "", 
+          },
       });
     }
 
