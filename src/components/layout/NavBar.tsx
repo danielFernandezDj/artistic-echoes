@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image'
+import SignIn from './SignIn';
+import { AlertDialog, Button } from '@radix-ui/themes';
 
 interface NavItem {
   label: string;
@@ -109,12 +111,19 @@ export default function Navbar() {
               >
                 Donate⤴︎
               </a>
-              <Link
-                href={"/signup"}
-                className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors"
-              >
-                Sign.Up
-              </Link>
+              <AlertDialog.Root>
+                <AlertDialog.Trigger>
+                  <Button
+                    className="cursor-pointer bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors"
+                  >
+                    Sign In
+                  </Button>
+                </AlertDialog.Trigger>
+
+                <AlertDialog.Content maxWidth="450px">
+                  <SignIn />
+                </AlertDialog.Content>
+              </AlertDialog.Root>
             </div>
 
           </div>
@@ -129,12 +138,19 @@ export default function Navbar() {
               >
                 Donate⤴︎
               </a>
-              <Link
-                href={"/signup"}
-                className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors"
-              >
-                Sign.Up
-              </Link>
+              <AlertDialog.Root>
+                <AlertDialog.Trigger>
+                  <Button
+                    className="cursor-pointer bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors"
+                  >
+                    Sign In
+                  </Button>
+                </AlertDialog.Trigger>
+
+                <AlertDialog.Content maxWidth="450px">
+                  <SignIn />
+                </AlertDialog.Content>
+              </AlertDialog.Root>
             </div>
             <button
               onClick={() => setIsOpen(!isOpen)}

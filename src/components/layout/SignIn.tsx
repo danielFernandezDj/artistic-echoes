@@ -3,15 +3,15 @@
 // import React, { useState } from "react"
 // import { useSession, signIn, signOut } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form"
-import { Heading, Text, Flex, Container, Box, Theme, Button, TextField } from "@radix-ui/themes";
-import { Mail, Lock } from 'lucide-react';
+import { Heading, Text, Grid, Flex, Container, Box, Theme, Button, TextField } from "@radix-ui/themes";
+import { Mail, Key } from 'lucide-react';
 
 type Inputs = {
     example: string
     exampleRequired: string
 }
 
-export default function SignUp() {
+export default function SignIn() {
     // const { data: session } = useSession();
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>()
     const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
@@ -22,11 +22,11 @@ export default function SignUp() {
         <>
             <Container>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Flex>
+                    <Grid gap="4">
                         <Heading>
-
+                            Sign In
                         </Heading>
-                        <Box>
+                        <Grid gap="2">
                             <TextField.Root
                                 placeholder="Insert your eMail"
                                 defaultValue="test" {...register("example")}
@@ -41,7 +41,7 @@ export default function SignUp() {
                                 {...register("exampleRequired", { required: true })}
                             >
                                 <TextField.Slot>
-                                    <Lock height="16" width="16" />
+                                    <Key height="16" width="16" />
                                 </TextField.Slot>
                             </TextField.Root>
                             {errors.exampleRequired && <span>This field is required</span>}
@@ -49,8 +49,8 @@ export default function SignUp() {
                             <Button type="submit">
                                 Signin
                             </Button>
-                        </Box>
-                    </Flex>
+                        </Grid>
+                    </Grid>
                 </form>
             </Container>
         </>
