@@ -4,7 +4,7 @@ import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/layout/NavBar"
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,21 +20,23 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({
   children,
+  session,
 }: Readonly<{
   children: React.ReactNode;
+  session: never;
 }>) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-auto flex flex-col overflow-auto`}
       >
-        <Theme>
-          <Navbar />
-          <main className="flex-grow">
-            <SessionProvider>{children}</SessionProvider>
-          </main>
-          <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
-        </Theme>
+        <SessionProvider session={session}>
+          <Theme>
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
+          </Theme>
+        </SessionProvider>
       </body>
     </html>
   );

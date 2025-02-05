@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image'
 import SignIn from './SignIn';
-import { AlertDialog, Button } from '@radix-ui/themes';
+import { AlertDialog, Button, Flex, Heading } from '@radix-ui/themes';
 
 interface NavItem {
   label: string;
@@ -120,6 +120,16 @@ export default function Navbar() {
                 </AlertDialog.Trigger>
 
                 <AlertDialog.Content maxWidth="450px">
+                  <Flex justify="between">
+                    <Heading>
+                      Sign In
+                    </Heading>
+                    <AlertDialog.Cancel
+                      className="text-red-500 hover:rotate-90 transition ease-in-out duration-300"
+                    >
+                      <X size={32} />
+                    </AlertDialog.Cancel>
+                  </Flex>
                   <SignIn />
                 </AlertDialog.Content>
               </AlertDialog.Root>
@@ -146,7 +156,18 @@ export default function Navbar() {
                   </Button>
                 </AlertDialog.Trigger>
 
-                <AlertDialog.Content maxWidth="450px">
+                <AlertDialog.Content maxWidth="400px">
+                  <Flex className='mb-4'>
+                    <AlertDialog.Cancel
+                      className="text-red-500 absolute cursor-pointer hover:rotate-90 transition ease-in-out duration-300"
+                    >
+                      <X size={32} />
+                    </AlertDialog.Cancel>
+                    <Heading className='text-center w-full'>
+                    Sign In
+                  </Heading>
+                  </Flex>
+
                   <SignIn />
                 </AlertDialog.Content>
               </AlertDialog.Root>
