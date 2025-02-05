@@ -1,57 +1,86 @@
 "use client"
 
-// import React, { useState } from "react"
-// import { useSession, signIn, signOut } from "next-auth/react";
+import { useState } from "react"
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form"
+import { useRouter } from "next/navigation";
+
 import { Heading, Text, Grid, Flex, Container, Box, Theme, Button, TextField } from "@radix-ui/themes";
 import { Mail, Key } from 'lucide-react';
 
 type Inputs = {
-    example: string
-    exampleRequired: string
+    email: string
+    password: string
 }
 
 export default function SignIn() {
     // const { data: session } = useSession();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>()
-    const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
 
-    console.log(watch("example"))
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
+
+    if (!error) {
+        return ("We get and error! :)")
+    }
+
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        setError(null); // Reset error state
+
+        const result = await signIn("credentials", {
+            redirect: false,
+            email: data.email,
+            password: data.password,
+        });
+
+        if (result?.error) {
+            setError(result.error); // Display authentication error
+        } else {
+            router.push("/dashboard"); // Redirect after successful login
+        }
+    };
+
 
     return (
         <>
             <Container>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} className="w-80 flex flex-col gap-3">
+                    {error && <p className="text-red-500">{error}</p>}
+
                     <Grid gap="4">
                         <Heading>
                             Sign In
                         </Heading>
+
                         <Grid gap="2">
                             <TextField.Root
-                                placeholder="Insert your eMail"
-                                defaultValue="test" {...register("example")}
+                                placeholder="Email"
+                                {...register("email", { required: "Email is required" })}
                             >
                                 <TextField.Slot>
                                     <Mail height="16" width="16" />
                                 </TextField.Slot>
                             </TextField.Root>
+                            {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
                             <TextField.Root
-                                placeholder="Insert your Password"
-                                {...register("exampleRequired", { required: true })}
+                                placeholder="Password"
+                                {...register("password", { required: "Password is required" })}
                             >
                                 <TextField.Slot>
                                     <Key height="16" width="16" />
                                 </TextField.Slot>
                             </TextField.Root>
-                            {errors.exampleRequired && <span>This field is required</span>}
+                            {errors.password && <p className="text-red-500">{errors.password.message}</p>}
 
                             <Button type="submit">
-                                Signin
+                                Sign In
                             </Button>
                         </Grid>
                     </Grid>
                 </form>
+
+
             </Container>
         </>
     )

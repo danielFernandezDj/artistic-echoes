@@ -18,25 +18,31 @@ export async function POST() {
       where: { email: session.user.email },
     });
 
-    if (!existingUser) {
-      // Insert new user
-      await prisma.userAuth.create({
-        data: {
-            email: session.user.email,
-            createdAt: new Date(),
-            password: "", 
-            imagesID: "", 
-          },
-      });
+    if (existingUser) {
+      return NextResponse.json(
+        { message: "User already exists", user: existingUser },
+        { status: 200 }
+      );
     }
 
+    // Create new user
+
+    const newUser = await prisma.userAuth.create({
+      data: {
+        email: session.user.email,
+        createdAt: new Date(),
+        password: "",
+        imagesID: "",
+      },
+    });
+
     return NextResponse.json(
-      { message: "User saved successfully" },
-      { status: 200 }
+      { message: "User created successfully", user: newUser },
+      { status: 201 }
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal Server Error ", error},
+      { message: "Internal Server Error ", error },
       { status: 500 }
     );
   }
