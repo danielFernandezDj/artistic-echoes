@@ -20,9 +20,9 @@ export default function SignIn() {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
-    if (!error) {
-        return ("We get and error! :)")
-    }
+    // if (error) {
+    //     return ("We get and error! :)")
+    // }
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setError(null); // Reset error state

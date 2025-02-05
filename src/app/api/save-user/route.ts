@@ -1,48 +1,44 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
-// import { UserType } from "@/lib/UserType";
+import bcrypt from "bcrypt";
 
-export async function POST() {
+export async function POST(req: Request) {
   try {
-    // Get the user's session.
-    const session = await getServerSession(authOptions);
+    const { email, password, imagesID } = await req.json();
 
-    if (!session || !session.user?.email) {
-      return NextResponse.json({ message: "Unauthorized" });
+    if (!email || !password) {
+      return NextResponse.json({ message: "Missing fields" }, { status: 400 });
     }
 
-    // Check if user already exists in DB
-    const existingUser = await prisma.userAuth.findUnique({
-      where: { email: session.user.email },
-    });
-
+    // Check if user already exists
+    const existingUser = await prisma.userAuth.findUnique({ where: { email } });
     if (existingUser) {
       return NextResponse.json(
-        { message: "User already exists", user: existingUser },
-        { status: 200 }
+        { message: "User already exists" },
+        { status: 400 }
       );
     }
 
-    // Create new user
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Create new user (Ensure imagesID is always a string)
     const newUser = await prisma.userAuth.create({
       data: {
-        email: session.user.email,
+        email: email,
+        password: hashedPassword,
         createdAt: new Date(),
-        password: "",
-        imagesID: "",
+        imagesID: imagesID || "", // ✅ Always store a string
       },
     });
 
     return NextResponse.json(
-      { message: "User created successfully", user: newUser },
+      { message: "User registered successfully", user: newUser },
       { status: 201 }
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal Server Error ", error },
+      { message: "Internal Server Error", error },
       { status: 500 }
     );
   }
