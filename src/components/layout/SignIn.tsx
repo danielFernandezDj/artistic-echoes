@@ -19,6 +19,7 @@ export default function SignIn() {
         register,
         handleSubmit,
         watch,
+        formState: { errors }
     } = useForm<Inputs>()
     const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
 
@@ -39,6 +40,7 @@ export default function SignIn() {
                                     <Mail height="16" width="16" />
                                 </TextField.Slot>
                             </TextField.Root>
+                            {errors.email && <span>This field is required</span>}
 
                             <TextField.Root
                                 placeholder="Password"
@@ -48,6 +50,7 @@ export default function SignIn() {
                                     <Key height="16" width="16" />
                                 </TextField.Slot>
                             </TextField.Root>
+                            {errors.password && <span>This field is required</span>}
 
                             <Button type="submit" className="cursor-pointer bg-magenta-color">
                                 Sign In
