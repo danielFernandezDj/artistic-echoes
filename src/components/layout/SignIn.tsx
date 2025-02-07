@@ -34,23 +34,25 @@ export default function SignIn() {
                         <Flex gap="2" direction="column" >
                             <TextField.Root
                                 placeholder="Email"
+                                className={errors.email ? "border border-red-500" : ""}
                                 {...register("email", { required: "Email is required" })}
                             >
                                 <TextField.Slot>
                                     <Mail height="16" width="16" />
                                 </TextField.Slot>
                             </TextField.Root>
-                            {errors.email && <span>This field is required</span>}
+                            {errors.email && <span className="text-red-600">This field is required</span>}
 
                             <TextField.Root
                                 placeholder="Password"
+                                className={errors.password ? "border border-red-500" : ""}
                                 {...register("password", { required: "Password is required" })}
                             >
                                 <TextField.Slot>
                                     <Key height="16" width="16" />
                                 </TextField.Slot>
                             </TextField.Root>
-                            {errors.password && <span>This field is required</span>}
+                            {errors.password && <span className="text-red-600">This field is required</span>}
 
                             <Button type="submit" className="cursor-pointer bg-magenta-color">
                                 Sign In
