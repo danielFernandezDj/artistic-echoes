@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image'
 import NavAlertContent from './NavAlertContent';
-import { AlertDialog, Button, Flex, Heading } from '@radix-ui/themes';
+import { AlertDialog, Button } from '@radix-ui/themes';
 
 interface NavItem {
   label: string;
@@ -112,11 +112,11 @@ export default function Navbar() {
               </a>
               <AlertDialog.Root>
                 <AlertDialog.Trigger>
-                  <a
+                  <Button
                     className="cursor-pointer bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors"
                   >
                     Sign In
-                  </a>
+                  </Button>
                 </AlertDialog.Trigger>
 
                 <NavAlertContent />
@@ -137,11 +137,11 @@ export default function Navbar() {
               </a>
               <AlertDialog.Root>
                 <AlertDialog.Trigger>
-                  <a
+                  <Button
                     className="cursor-pointer bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors"
                   >
                     Sign In
-                  </a>
+                  </Button>
                 </AlertDialog.Trigger>
 
                 <NavAlertContent />
@@ -187,11 +187,11 @@ export default function Navbar() {
               </a>
               <AlertDialog.Root>
                 <AlertDialog.Trigger>
-                  <a
+                  <Button
                     className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-mono font-medium hover:bg-blue-700 transition-colors"
                   >
                     Sign In
-                  </a>
+                  </Button>
                 </AlertDialog.Trigger>
 
                 <NavAlertContent />
