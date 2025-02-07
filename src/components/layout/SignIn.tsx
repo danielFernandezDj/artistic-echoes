@@ -3,7 +3,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form"
 
-import { Heading, Text, Grid, Flex, Container, Button, TextField } from "@radix-ui/themes";
+import { Heading, Text, Grid, Container, Button, TextField } from "@radix-ui/themes";
 import { Mail, Key, X } from 'lucide-react';
 
 
@@ -28,7 +28,7 @@ export default function SignIn() {
     return (
         <>
             {!session ? (
-                <Container>
+                <Container className="flex justify-center">
                     <form onSubmit={handleSubmit(onSubmit)} className="w-80 flex flex-col gap-3">
                         <Grid gap="4">
                             <Grid gap="2">
@@ -56,6 +56,8 @@ export default function SignIn() {
                             </Grid>
                         </Grid>
                     </form>
+
+                    <Heading>or</Heading>
 
                     {/* Auth-Providers */}
                     <Grid gap="2" className="my-2">
