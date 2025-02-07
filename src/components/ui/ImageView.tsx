@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import Container from "../layout/Container";
 import Image from "../layout/Image";
+import { Link } from "@radix-ui/themes";
 import { ImageDown, X, Heart } from "lucide-react";
 import { ImageStock } from "@/lib/ImageStockType";
 
@@ -14,6 +16,7 @@ interface ImageViewProps {
 }
 
 const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selectedImage, setSelectedImage }) => {
+    const { data: session } = useSession();
     const [toggleLike, setToggleLike] = useState(false)
 
     useEffect(() => {
@@ -55,14 +58,15 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                     </button>
 
                     <div className="flex items-center gap-4">
-                        <a
-                            href="#"
-                            onClick={() => setToggleLike(!toggleLike)}
-                            className="p-2 rounded-md border hover:border-gray-700 hover:bg-gray-100"
+                        <Link
+                            onClick={() => {
+                                session ? setToggleLike(!toggleLike) : //Need to fix this
+                            }}
+                            className="p-2 rounded-md border text-gray-800 hover:border-gray-700 hover:bg-gray-100"
                         >
 
                             <Heart size={26} className={toggleLike ? 'fill-red-500' : 'fill-none'} />
-                        </a>
+                        </Link>
                         <a
                             href={`/api/download/${selectedImage.id}`} download
                             className="flex gap-2 items-center p-2 font-bold rounded-md border text-gray-800 hover:border-gray-700 hover:bg-gray-100"

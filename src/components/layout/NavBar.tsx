@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image'
-import NavAlertContent from './NavAlertContent';
-import { AlertDialog, Button } from '@radix-ui/themes';
+import SignInButton from '../ui/SignInButton';
 
 interface NavItem {
   label: string;
@@ -110,17 +109,8 @@ export default function Navbar() {
               >
                 Donate⤴︎
               </a>
-              <AlertDialog.Root>
-                <AlertDialog.Trigger>
-                  <Button
-                    className="cursor-pointer bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors"
-                  >
-                    Sign In
-                  </Button>
-                </AlertDialog.Trigger>
 
-                <NavAlertContent />
-              </AlertDialog.Root>
+              <SignInButton />
             </div>
 
           </div>
@@ -135,17 +125,8 @@ export default function Navbar() {
               >
                 Donate⤴︎
               </a>
-              <AlertDialog.Root>
-                <AlertDialog.Trigger>
-                  <Button
-                    className="cursor-pointer bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors"
-                  >
-                    Sign In
-                  </Button>
-                </AlertDialog.Trigger>
-
-                <NavAlertContent />
-              </AlertDialog.Root>
+             
+              <SignInButton />
             </div>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -185,17 +166,8 @@ export default function Navbar() {
               >
                 Donate⤴︎
               </a>
-              <AlertDialog.Root>
-                <AlertDialog.Trigger>
-                  <Button
-                    className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-mono font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    Sign In
-                  </Button>
-                </AlertDialog.Trigger>
-
-                <NavAlertContent />
-              </AlertDialog.Root>
+              
+              <SignInButton />
             </div>
           </div>
         </div>
