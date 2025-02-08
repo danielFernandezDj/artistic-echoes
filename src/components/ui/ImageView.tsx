@@ -7,6 +7,7 @@ import Image from "../layout/Image";
 import { Link } from "@radix-ui/themes";
 import { ImageDown, X, Heart } from "lucide-react";
 import { ImageStock } from "@/lib/ImageStockType";
+import { useAuthModal } from "@/context/AuthModalContext";
 
 interface ImageViewProps {
     imageView: boolean;
@@ -17,6 +18,7 @@ interface ImageViewProps {
 
 const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selectedImage, setSelectedImage }) => {
     const { data: session } = useSession();
+    const { openModal } = useAuthModal();
     const [toggleLike, setToggleLike] = useState(false)
 
     useEffect(() => {
@@ -60,7 +62,11 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                     <div className="flex items-center gap-4">
                         <Link
                             onClick={() => {
-                                session ? setToggleLike(!toggleLike) : //Need to fix this
+                                if (session) {
+                                    setToggleLike(!toggleLike)
+                                } else {
+                                    openModal()
+                                }
                             }}
                             className="p-2 rounded-md border text-gray-800 hover:border-gray-700 hover:bg-gray-100"
                         >
