@@ -20,6 +20,8 @@ export async function GET() {
       select: { imagesID: true },
     });
 
+    console.log(userImagesID)
+
     if (!userImagesID) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
