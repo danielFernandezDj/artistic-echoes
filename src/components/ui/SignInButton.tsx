@@ -6,10 +6,10 @@ import NavAlertContent from "../layout/NavAlertContent";
 import { useAuthModal } from "@/context/AuthModalContext";
 
 export default function SignInButton() {
-    const { isOpen, openModal, closeModal } = useAuthModal();
+    const { isOpen, openModal } = useAuthModal();
 
     return (
-        <AlertDialog.Root open={isOpen} onOpenChange={closeModal}>
+        <AlertDialog.Root open={isOpen} >
             <AlertDialog.Trigger asChild>
                 <Button
                     onClick={openModal}
