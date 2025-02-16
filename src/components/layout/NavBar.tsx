@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image'
+import SignInButton from '../ui/SignInButton';
 
 interface NavItem {
   label: string;
@@ -38,7 +39,7 @@ const useScrolling = () => {
   return scrolling;
 }
 
-const Navbar = () => {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState('')
 
@@ -108,9 +109,8 @@ const Navbar = () => {
               >
                 Donate⤴︎
               </a>
-              <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
-                Sign In
-              </button>
+
+              <SignInButton />
             </div>
 
           </div>
@@ -125,9 +125,8 @@ const Navbar = () => {
               >
                 Donate⤴︎
               </a>
-              <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
-                Sign In
-              </button>
+             
+              <SignInButton />
             </div>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -167,9 +166,8 @@ const Navbar = () => {
               >
                 Donate⤴︎
               </a>
-              <button className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-mono font-medium hover:bg-blue-700 transition-colors">
-                Sign In
-              </button>
+              
+              <SignInButton />
             </div>
           </div>
         </div>
@@ -180,4 +178,3 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;

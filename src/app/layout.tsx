@@ -1,6 +1,12 @@
-import type { Metadata } from "next";
+"use client"
+
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/layout/NavBar"
+import { SessionProvider } from "next-auth/react";
+// import Providers from "@/provider/Providers";
+import { AuthModalProvider } from "@/context/AuthModalContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,29 +19,28 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Artistic Echoes",
-  description: "Artistic Echoes is a platform for artists to showcase their work and connect with their audience.",
-  icons: {
-    icon: "/images/icons.svg",
-  }
-};
 
 export default function RootLayout({
   children,
+  session,
 }: Readonly<{
   children: React.ReactNode;
+  session: never;
 }>) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-auto flex flex-col overflow-auto`}
       >
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
+        <SessionProvider session={session}>
+          <AuthModalProvider>
+            <Theme>
+              <Navbar />
+              <main className="flex-grow">{children}</main>
+              <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
+            </Theme>
+          </AuthModalProvider>
+        </SessionProvider>
       </body>
     </html>
   );
