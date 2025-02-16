@@ -5,8 +5,7 @@ import { Theme } from "@radix-ui/themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/layout/NavBar"
 import { SessionProvider } from "next-auth/react";
-// import Providers from "@/provider/Providers";
-import { AuthModalProvider } from "@/context/AuthModalContext";
+import Providers from "@/provider/Providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,13 +32,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-auto flex flex-col overflow-auto`}
       >
         <SessionProvider session={session}>
-          <AuthModalProvider>
+          <Providers>
             <Theme>
               <Navbar />
               <main className="flex-grow">{children}</main>
               <div className="fixed inset-0 -z-10 w-full h-full opacity-25 pattern-bg"></div>
             </Theme>
-          </AuthModalProvider>
+          </Providers>
         </SessionProvider>
       </body>
     </html>
