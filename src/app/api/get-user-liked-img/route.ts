@@ -19,7 +19,6 @@ export async function GET() {
       where: { email: userEmail },
       select: { imagesID: true },
     });
-    console.log(userImagesID)
 
     if (!userImagesID) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });

@@ -70,8 +70,10 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                             }}
                             className="p-2 rounded-md border text-gray-800 hover:border-gray-700 hover:bg-gray-100"
                         >
-
-                            <Heart size={26} className={toggleLike ? 'fill-red-500' : 'fill-none'} />
+                            <Heart
+                                size={26}
+                                className={toggleLike ? 'fill-red-500' : 'fill-none'}
+                            />
                         </Link>
                         <a
                             href={`/api/download/${selectedImage.id}`} download
