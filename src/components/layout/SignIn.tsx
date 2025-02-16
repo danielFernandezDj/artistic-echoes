@@ -2,10 +2,8 @@
 
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form"
-
 import { Heading, Text, Flex, Container, Button, TextField } from "@radix-ui/themes";
 import { Mail, Key, } from 'lucide-react';
-
 
 type Inputs = {
     email: string
@@ -24,7 +22,6 @@ export default function SignIn() {
     const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
 
     console.log(watch("email")) // watch input value by passing the name of it.
-
 
     return (
         <>
