@@ -8,7 +8,7 @@ export async function GET() {
 
   // Get User Email
   if (!session || !session.user?.email) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ message: "Unauthorized because user is not Signin!" }, { status: 401 });
   }
 
   const userEmail = session.user?.email;

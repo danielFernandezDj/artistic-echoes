@@ -20,6 +20,21 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     const { data: session } = useSession();
     const { openModal } = useAuthModal();
     const [toggleLike, setToggleLike] = useState(false)
+    const [imageIDs, setImageIds] = useState<string[]>([])
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const response = await fetch('/api/get-user-liked-img')
+                const data = await response.json()
+                setImageIds(Array.isArray(data.imageID) ? data.imageID : [])
+            } catch (error) {
+                console.error('Error fetching image Ids', error)
+            }
+        }
+
+        fetchImages();
+    }, [])
 
     useEffect(() => {
         if (imageView) {
@@ -35,10 +50,25 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
 
     if (!imageView || !selectedImage) return null;
 
+
+
     const handleClose = () => {
         setImageView(false);
         setSelectedImage(null)
     }
+
+    console.log("Fetched Image IDs:", imageIDs);
+    console.log("Selected Image Gallery Number:", selectedImage?.GalleryNumber);
+    console.log(
+        "Does Image Exist in Liked List?:",
+        Array.isArray(imageIDs) && selectedImage?.GalleryNumber
+            ? imageIDs.includes(selectedImage.GalleryNumber)
+            : "Invalid Data"
+    );
+
+    const isLiked = Array.isArray(imageIDs) && selectedImage?.GalleryNumber
+        ? imageIDs.includes(String(selectedImage.GalleryNumber))
+        : false;
 
     return (
         <Container
@@ -72,7 +102,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         >
                             <Heart
                                 size={26}
-                                className={toggleLike ? 'fill-red-500' : 'fill-none'}
+                                className={isLiked || toggleLike ? 'fill-red-500' : 'fill-none'}
                             />
                         </Link>
                         <a
