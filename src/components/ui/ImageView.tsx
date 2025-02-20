@@ -36,6 +36,10 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
         fetchImages();
     }, [])
 
+    const isLiked = Array.isArray(imageIDs) && selectedImage?.GalleryNumber
+        ? imageIDs.includes(String(selectedImage.GalleryNumber))
+        : false;
+
     useEffect(() => {
         if (imageView) {
             document.body.style.overflow = 'hidden';
@@ -65,10 +69,6 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
             ? imageIDs.includes(selectedImage.GalleryNumber)
             : "Invalid Data"
     );
-
-    const isLiked = Array.isArray(imageIDs) && selectedImage?.GalleryNumber
-        ? imageIDs.includes(String(selectedImage.GalleryNumber))
-        : false;
 
     return (
         <Container
