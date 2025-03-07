@@ -22,23 +22,48 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     const [toggleLike, setToggleLike] = useState(false)
     const [imageIDs, setImageIds] = useState<string[]>([])
 
+    // Fetching user's favorite images
     useEffect(() => {
         const fetchImages = async () => {
             try {
                 const response = await fetch('/api/get-user-liked-img')
                 const data = await response.json()
+
                 setImageIds(Array.isArray(data.imageID) ? data.imageID : [])
             } catch (error) {
                 console.error('Error fetching image Ids', error)
             }
         }
-
         fetchImages();
     }, [])
 
     const isLiked = Array.isArray(imageIDs) && selectedImage?.GalleryNumber
         ? imageIDs.includes(String(selectedImage.GalleryNumber))
         : false;
+
+    const handleFavorite = async () => {
+        if (isLiked || !selectedImage || !session?.user) return;
+
+        try {
+            const res = await fetch('/api/add-new-user-img', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    imageID: selectedImage.GalleryNumber,
+                    userEmail: session?.user.email,
+                }),
+            })
+
+            if (res.ok) {
+                setToggleLike(true)
+                setImageIds((prev) => [...prev, String(selectedImage.GalleryNumber)])
+            } else {
+                console.error("Failed to save favorite image")
+            }
+        } catch (error) {
+            console.error("Error saving favorite image", error)
+        }
+    }
 
     useEffect(() => {
         if (imageView) {
@@ -54,21 +79,10 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
 
     if (!imageView || !selectedImage) return null;
 
-
-
     const handleClose = () => {
         setImageView(false);
         setSelectedImage(null)
     }
-
-    console.log("Fetched Image IDs:", imageIDs);
-    console.log("Selected Image Gallery Number:", selectedImage?.GalleryNumber);
-    console.log(
-        "Does Image Exist in Liked List?:",
-        Array.isArray(imageIDs) && selectedImage?.GalleryNumber
-            ? imageIDs.includes(selectedImage.GalleryNumber)
-            : "Invalid Data"
-    );
 
     return (
         <Container
@@ -93,7 +107,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         <Link
                             onClick={() => {
                                 if (session) {
-                                    setToggleLike(!toggleLike)
+                                    handleFavorite()
                                 } else {
                                     openModal()
                                 }
