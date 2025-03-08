@@ -1,39 +1,66 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function PUT(request: Request) {
   try {
-    // 1️⃣ Extract query parameters from URL
-    const { searchParams } = new URL(request.url);
-    const userEmail = searchParams.get("userEmail");
-    const imageID = searchParams.get("imageID");
-
-    // 2️⃣ Validate input
-    if (!userEmail || !imageID) {
+    const body = await request.json();
+    if (!body || typeof body !== "object") {
       return NextResponse.json(
-        { message: "Missing parameters" },
+        { message: "Invalid request body" },
         { status: 400 }
       );
     }
 
-    // 3️⃣ Find user in the database
+    const { userEmail, GalleryNumber } = body;
+
+    if (!userEmail || !GalleryNumber) {
+      return NextResponse.json(
+        { message: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
     const user = await prisma.userAuth.findUnique({
       where: { email: userEmail },
-      select: { imagesID: true }, // Only fetch the imagesID field
     });
 
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    // 4️⃣ Check if imageID exists in imagesID array
-    const exists = user.imagesID.includes(imageID);
+    const existingFavorites = Array.isArray(user.imagesID) ? user.imagesID : [];
 
-    return NextResponse.json({ exists });
+    const galleryNum = String(GalleryNumber);
+
+    if (existingFavorites.includes(galleryNum)) {
+      return NextResponse.json(
+        { message: "Image already favorited" },
+        { status: 400 }
+      );
+    }
+
+    const updatedUser = await prisma.userAuth.update({
+      where: { email: userEmail },
+      data: {
+        imagesID: {
+          set: [...existingFavorites, galleryNum],
+        },
+      },
+    });
+
+    return NextResponse.json(updatedUser);
   } catch (error) {
-    console.error("❌ Error checking image:", error);
+    console.error("❌ Error updating user:", error);
+
+    if (error instanceof Error) {
+      return NextResponse.json(
+        { message: "Update failed", error: error.message },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Update failed", error: "Unknown error" },
       { status: 500 }
     );
   }
