@@ -9,6 +9,12 @@ import { ImageDown, X, Heart } from "lucide-react";
 import { ImageStock } from "@/lib/ImageStockType";
 import { useAuthModal } from "@/context/AuthModalContext";
 
+// ? NOW I NEED TO ADD THE 'PUT' AND THE 'DELETE' TO HANDLE THE LIKE-BTN CONDITION.
+// * So if the user is logged in, and the user clicks the like button, it will add the image to the user's favorite list.
+//  If the user is not logged in, it will open the login modal.
+// * If the user is logged in and the user clicks the like button again, it will remove the image from the user's favorite list.
+//  If the user is not logged in, it will open the login modal.
+
 interface ImageViewProps {
     imageView: boolean;
     setImageView: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,7 +52,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
 
         try {
             const res = await fetch('/api/add-new-user-img', {
-                method: "POST",
+                method: "GET",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     imageID: selectedImage.GalleryNumber,
@@ -62,6 +68,29 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
             }
         } catch (error) {
             console.error("Error saving favorite image", error)
+        }
+    }
+
+    const handleRemoveFavorite = async () => {
+        if (!isLiked || !selectedImage || !session?.user) return;
+        try {
+            const res = await fetch('/api/remove-user-image', {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userEmail: session?.user.email,
+                    GalleryNumber: selectedImage.GalleryNumber,
+                })
+            })
+
+            if (res.ok) {
+                setToggleLike(false)
+                setImageIds((prev) => prev.filter((id) => id !== String(selectedImage.GalleryNumber)))
+            } else {
+                console.error("Files to remove favorite image")
+            }
+        } catch (error) {
+            console.error("Error removing favorite image", error)
         }
     }
 
@@ -107,7 +136,11 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         <Link
                             onClick={() => {
                                 if (session) {
-                                    handleFavorite()
+                                    if (isLiked || toggleLike) {
+                                        handleRemoveFavorite()
+                                    } else {
+                                        handleFavorite()
+                                    }
                                 } else {
                                     openModal()
                                 }
