@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export async function PUT(request: Request) {
   try {
     const body = await request.json();
+    
     if (!body || typeof body !== "object") {
       return NextResponse.json(
         { message: "Invalid request body" },

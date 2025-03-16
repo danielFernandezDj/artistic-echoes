@@ -28,6 +28,10 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     const [toggleLike, setToggleLike] = useState(false)
     const [imageIDs, setImageIds] = useState<string[]>([])
 
+    const isLiked = Array.isArray(imageIDs) && selectedImage?.GalleryNumber
+        ? imageIDs.includes(String(selectedImage.GalleryNumber))
+        : false;
+
     // Fetching user's favorite images
     useEffect(() => {
         const fetchImages = async () => {
@@ -43,43 +47,16 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
         fetchImages();
     }, [])
 
-    const isLiked = Array.isArray(imageIDs) && selectedImage?.GalleryNumber
-        ? imageIDs.includes(String(selectedImage.GalleryNumber))
-        : false;
-
-    const handleFavorite = async () => {
-        if (isLiked || !selectedImage || !session?.user) return;
-
-        try {
-            const res = await fetch('/api/add-new-user-img', {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    imageID: selectedImage.GalleryNumber,
-                    userEmail: session?.user.email,
-                }),
-            })
-
-            if (res.ok) {
-                setToggleLike(true)
-                setImageIds((prev) => [...prev, String(selectedImage.GalleryNumber)])
-            } else {
-                console.error("Failed to save favorite image")
-            }
-        } catch (error) {
-            console.error("Error saving favorite image", error)
-        }
-    }
-
     const handleRemoveFavorite = async () => {
         if (!isLiked || !selectedImage || !session?.user) return;
+
         try {
             const res = await fetch('/api/remove-user-image', {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    userEmail: session?.user.email,
-                    GalleryNumber: selectedImage.GalleryNumber,
+                    userEmail: session?.user?.email,
+                    GalleryNumber: selectedImage?.GalleryNumber,
                 })
             })
 
@@ -93,6 +70,43 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
             console.error("Error removing favorite image", error)
         }
     }
+
+    const handleUpdateFavorite = async () => {
+        if (isLiked || !selectedImage || !session?.user) {
+            console.error(`❌ Error: handleUpdateFavorite > Reason ${isLiked ? "Already liked" : "Invalid session or image"}`);
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/update-user-favorite', {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userEmail: session?.user?.email,
+                    GalleryNumber: selectedImage.GalleryNumber,
+                })
+            });
+
+            if (!res.ok) {
+                const errorData = await (async () => {
+                    try {
+                        return await res.json();
+                    } catch {
+                        return { message: "Failed to parse error response" };
+                    }
+                })();
+
+                console.error("❌ Failed to update favorite image:", errorData);
+                return;
+            }
+
+            setToggleLike((prev) => !prev);
+            setImageIds((prev) => [...new Set([...prev, String(selectedImage.GalleryNumber)])]);
+
+        } catch (error) {
+            console.error("Error updating favorite image", error);
+        }
+    };
 
     useEffect(() => {
         if (imageView) {
@@ -135,14 +149,15 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                     <div className="flex items-center gap-4">
                         <Link
                             onClick={() => {
-                                if (session) {
-                                    if (isLiked || toggleLike) {
-                                        handleRemoveFavorite()
-                                    } else {
-                                        handleFavorite()
-                                    }
+                                if (!session) {
+                                    openModal();
+                                    return;
+                                }
+
+                                if (isLiked || toggleLike) {
+                                    handleRemoveFavorite();
                                 } else {
-                                    openModal()
+                                    handleUpdateFavorite();
                                 }
                             }}
                             className="p-2 rounded-md border text-gray-800 hover:border-gray-700 hover:bg-gray-100"
