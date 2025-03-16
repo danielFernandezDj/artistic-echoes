@@ -9,6 +9,12 @@ import { ImageDown, X, Heart } from "lucide-react";
 import { ImageStock } from "@/lib/ImageStockType";
 import { useAuthModal } from "@/context/AuthModalContext";
 
+// ? NOW I NEED TO ADD THE 'PUT' AND THE 'DELETE' TO HANDLE THE LIKE-BTN CONDITION.
+// * So if the user is logged in, and the user clicks the like button, it will add the image to the user's favorite list.
+//  If the user is not logged in, it will open the login modal.
+// * If the user is logged in and the user clicks the like button again, it will remove the image from the user's favorite list.
+//  If the user is not logged in, it will open the login modal.
+
 interface ImageViewProps {
     imageView: boolean;
     setImageView: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,6 +26,87 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     const { data: session } = useSession();
     const { openModal } = useAuthModal();
     const [toggleLike, setToggleLike] = useState(false)
+    const [imageIDs, setImageIds] = useState<string[]>([])
+
+    const isLiked = Array.isArray(imageIDs) && selectedImage?.GalleryNumber
+        ? imageIDs.includes(String(selectedImage.GalleryNumber))
+        : false;
+
+    // Fetching user's favorite images
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const response = await fetch('/api/get-user-liked-img')
+                const data = await response.json()
+
+                setImageIds(Array.isArray(data.imageID) ? data.imageID : [])
+            } catch (error) {
+                console.error('Error fetching image Ids', error)
+            }
+        }
+        fetchImages();
+    }, [])
+
+    const handleRemoveFavorite = async () => {
+        if (!isLiked || !selectedImage || !session?.user) return;
+
+        try {
+            const res = await fetch('/api/remove-user-image', {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userEmail: session?.user?.email,
+                    GalleryNumber: selectedImage?.GalleryNumber,
+                })
+            })
+
+            if (res.ok) {
+                setToggleLike(false)
+                setImageIds((prev) => prev.filter((id) => id !== String(selectedImage.GalleryNumber)))
+            } else {
+                console.error("Files to remove favorite image")
+            }
+        } catch (error) {
+            console.error("Error removing favorite image", error)
+        }
+    }
+
+    const handleUpdateFavorite = async () => {
+        if (isLiked || !selectedImage || !session?.user) {
+            console.error(`❌ Error: handleUpdateFavorite > Reason ${isLiked ? "Already liked" : "Invalid session or image"}`);
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/update-user-favorite', {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userEmail: session?.user?.email,
+                    GalleryNumber: selectedImage.GalleryNumber,
+                })
+            });
+
+            if (!res.ok) {
+                const errorData = await (async () => {
+                    try {
+                        return await res.json();
+                    } catch {
+                        return { message: "Failed to parse error response" };
+                    }
+                })();
+
+                console.error("❌ Failed to update favorite image:", errorData);
+                return;
+            }
+
+            setToggleLike((prev) => !prev);
+            setImageIds((prev) => [...new Set([...prev, String(selectedImage.GalleryNumber)])]);
+
+        } catch (error) {
+            console.error("Error updating favorite image", error);
+        }
+    };
 
     useEffect(() => {
         if (imageView) {
@@ -62,16 +149,23 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                     <div className="flex items-center gap-4">
                         <Link
                             onClick={() => {
-                                if (session) {
-                                    setToggleLike(!toggleLike)
+                                if (!session) {
+                                    openModal();
+                                    return;
+                                }
+
+                                if (isLiked || toggleLike) {
+                                    handleRemoveFavorite();
                                 } else {
-                                    openModal()
+                                    handleUpdateFavorite();
                                 }
                             }}
                             className="p-2 rounded-md border text-gray-800 hover:border-gray-700 hover:bg-gray-100"
                         >
-
-                            <Heart size={26} className={toggleLike ? 'fill-red-500' : 'fill-none'} />
+                            <Heart
+                                size={26}
+                                className={isLiked || toggleLike ? 'fill-red-500' : 'fill-none'}
+                            />
                         </Link>
                         <a
                             href={`/api/download/${selectedImage.id}`} download
