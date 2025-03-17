@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image'
 import SignInButton from '../ui/SignInButton';
+import { useSession } from "next-auth/react";
 
 interface NavItem {
   label: string;
@@ -42,6 +43,7 @@ const useScrolling = () => {
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState('')
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (isOpen) {
@@ -110,7 +112,12 @@ export default function Navbar() {
                 Donate⤴︎
               </a>
 
-              <SignInButton />
+              {session ? (
+                <SignInButton />
+              ) : (
+                <SignInButton />
+              )
+              }
             </div>
 
           </div>
@@ -125,7 +132,7 @@ export default function Navbar() {
               >
                 Donate⤴︎
               </a>
-             
+
               <SignInButton />
             </div>
             <button
@@ -166,7 +173,7 @@ export default function Navbar() {
               >
                 Donate⤴︎
               </a>
-              
+
               <SignInButton />
             </div>
           </div>
