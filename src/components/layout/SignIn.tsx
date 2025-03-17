@@ -13,75 +13,10 @@ type Inputs = {
 export default function SignIn() {
     const { data: session } = useSession();
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors }
-    } = useForm<Inputs>()
-    const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
-
-    console.log(watch("email")) // watch input value by passing the name of it.
-
     return (
         <>
             {!session ? (
                 <Container>
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-                        <Flex gap="3" direction="column" >
-                            <div>
-                                <Heading
-                                    size="3"
-                                    weight="medium"
-                                    className="mb-2"
-                                >
-                                    Email
-                                </Heading>
-                                <TextField.Root
-                                    variant="classic"
-                                    placeholder="Email"
-                                    className={errors.email ? "border border-red-500" : ""}
-                                    {...register("email", { required: "Email is required" })}
-                                >
-                                    <TextField.Slot>
-                                        <Mail height="16" width="16" />
-                                    </TextField.Slot>
-                                </TextField.Root>
-                                {errors.email && <span className="text-red-600">This field is required</span>}
-                            </div>
-
-                            <div>
-                                <Heading
-                                    size="3"
-                                    weight="medium"
-                                    className="mb-2"
-                                >
-                                    Password
-                                </Heading>
-                                <TextField.Root
-                                    variant="classic"
-                                    placeholder="Password"
-                                    className={errors.password ? "border border-red-500" : ""}
-                                    {...register("password", { required: "Password is required" })}
-                                >
-                                    <TextField.Slot>
-                                        <Key height="16" width="16" />
-                                    </TextField.Slot>
-                                </TextField.Root>
-                                {errors.password && <span className="text-red-600">This field is required</span>}
-                            </div>
-
-                            <Button type="submit" className=" cursor-pointer bg-magenta-color">
-                                Sign In
-                            </Button>
-                        </Flex>
-                    </form>
-
-                    <Heading size="4" className="w-full my-4 text-center">
-                        or
-                    </Heading>
-
-                    {/* Auth-Providers */}
                     <Flex
                         gap="2"
                         align="center"
