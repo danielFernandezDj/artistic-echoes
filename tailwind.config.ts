@@ -10,6 +10,7 @@ export default {
     extend: {
       colors: {
         "orange-color": "#D45B2B",
+        "orange-hover": "#B43D1A",
         "magenta-color": "#6625BF",
         "magenta-hover": "#521f9b",
       },
