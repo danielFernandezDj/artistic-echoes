@@ -1,7 +1,7 @@
 "use client"
 
-import { useSession, signIn, signOut } from "next-auth/react";
-import { Text, Flex, Container, Button,  } from "@radix-ui/themes";
+import { useSession, signIn } from "next-auth/react";
+import { Flex, Container, Button, } from "@radix-ui/themes";
 import UserMenu from "./UserMenu";
 
 export default function SignIn() {
@@ -35,10 +35,9 @@ export default function SignIn() {
                 </Container>
             ) : (
                 <div>
-                    
-                <UserMenu />
+                    <UserMenu />
                 </div>
-               
+
             )}
         </>
     )
