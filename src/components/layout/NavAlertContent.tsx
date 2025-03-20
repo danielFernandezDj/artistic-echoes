@@ -14,22 +14,20 @@ export default function NavAlertContent() {
         <>
             <AlertDialog.Content className="flex flex-col gap-4">
                 <Flex justify="between" align="center">
-                    <AlertDialog.Title>
-                        <span className="text-base font-normal"> Welcome </span> <br />
+                    <AlertDialog.Title className="flex flex-col gap-2">
+                        <span className="text-base font-semibold"> Welcome! </span>
                         <span className="text-magenta-color">
                             {session?.user?.name}
-                        </span>
-                    </AlertDialog.Title>
-
-                    <div className="flex  gap-6">
-
+                        </span> 
                         <Button
                             color="red"
                             onClick={() => signOut()}
                         >
                             Sign out
                         </Button>
+                    </AlertDialog.Title>
 
+                    <div className="absolute top-6 right-4">
                         <AlertDialog.Cancel
                             onClick={closeModal}
                             className="text-red-500 relative cursor-pointer hover:rotate-90 transition ease-in-out duration-300"

@@ -2,7 +2,7 @@
 
 import { useSession, signIn } from "next-auth/react";
 import { Flex, Container, Button, } from "@radix-ui/themes";
-import UserMenu from "./UserMenu";
+import UserMenu from "./UserContentMenu";
 
 export default function SignIn() {
     const { data: session } = useSession();

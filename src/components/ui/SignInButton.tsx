@@ -12,7 +12,7 @@ export default function SignInButton() {
 
     const userInitials = session?.user?.name
         ? session.user.name.split(' ').map((n: string) => n[0]).join('')
-        : 'A'; // Default to 'A' if name is not available
+        : 'A';
 
     return (
         <AlertDialog.Root open={isOpen} >
@@ -21,7 +21,7 @@ export default function SignInButton() {
                     ? (<button onClick={openModal}>
                         <Avatar
                             variant="solid"
-                            radius="full"
+                            radius="medium"
                             color="iris"
                             fallback={`${userInitials}`}
                         />
