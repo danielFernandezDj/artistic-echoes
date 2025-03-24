@@ -11,7 +11,7 @@ model UserAuth {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   email     String    @unique
   password  String    
-  imagesID  ImagesID[]  
+  imagesID  String[]
   createdAt DateTime  @default(now())
 
   @@map("user-authentication")
@@ -20,9 +20,9 @@ model UserAuth {
 model ImageStock {
     id                      String  @id @default(auto()) @map("_id") @db.ObjectId
     objectID                Int     @unique   
-    museumID                Int                    
+    museumID                String                    
     accessionNumber         String
-    accessionYear           Int
+    accessionYear           String
     isPublicDomain          Boolean
     objectType              String?
     objectTitle             String?

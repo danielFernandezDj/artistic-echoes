@@ -6,7 +6,6 @@ import { authOptions } from "../auth/[...nextauth]/route";
 export async function GET() {
   const session = await getServerSession(authOptions);
 
-  // Get User Email
   if (!session || !session.user?.email) {
     return NextResponse.json(
       { message: "Unauthorized because user is not Signin!" },
@@ -17,7 +16,6 @@ export async function GET() {
   const userEmail = session.user?.email;
 
   try {
-    // Search for the User Liked imagesID
     const userImagesID = await prisma.userAuth.findUnique({
       where: { email: userEmail },
       select: { imagesID: true },
