@@ -61,7 +61,7 @@ const Gallery: React.FC = () => {
             <div
               key={index}
               onClick={() => {
-                setSelectedImage(image)
+                setSelectedImage(image);
                 setImageView(true)
               }}
               className="relative mb-8 md:mb-16 group"

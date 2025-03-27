@@ -1,5 +1,7 @@
 export interface ImageStock {
   id: string;
+  objectID: string;
+  museumID: string;
   primaryImage: string;
   primaryImageSmall: string;
   objectTitle: string;
