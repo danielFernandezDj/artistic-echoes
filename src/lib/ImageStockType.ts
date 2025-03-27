@@ -1,5 +1,6 @@
 export interface ImageStock {
   id: string;
+  objectID: string;
   primaryImage: string;
   primaryImageSmall: string;
   objectTitle: string;

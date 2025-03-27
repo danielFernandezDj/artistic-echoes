@@ -12,9 +12,9 @@ export async function PUT(request: Request) {
       );
     }
 
-    const { userEmail, GalleryNumber } = body;
+    const { userEmail, museumID } = body;
 
-    if (!userEmail || !GalleryNumber) {
+    if (!userEmail || !museumID) {
       return NextResponse.json(
         { message: "Missing required fields" },
         { status: 400 }
@@ -31,9 +31,9 @@ export async function PUT(request: Request) {
 
     const existingFavorites = Array.isArray(user.imagesID) ? user.imagesID : [];
 
-    const galleryNum = String(GalleryNumber);
+    const objectID = String(museumID);
 
-    if (existingFavorites.includes(galleryNum)) {
+    if (existingFavorites.includes(objectID)) {
       return NextResponse.json(
         { message: "Image already favorited" },
         { status: 400 }
@@ -44,7 +44,7 @@ export async function PUT(request: Request) {
       where: { email: userEmail },
       data: {
         imagesID: {
-          set: [...existingFavorites, galleryNum],
+          set: [...existingFavorites, objectID],
         },
       },
     });
