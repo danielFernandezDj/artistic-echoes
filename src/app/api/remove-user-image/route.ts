@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
   try {
-    // 1️⃣ Extract and validate request body
     const body = await request.json();
     const { userEmail, objectID } = body;
 
@@ -14,17 +13,15 @@ export async function DELETE(request: Request) {
       );
     }
 
-    // 2️⃣ Find the user
     const user = await prisma.userAuth.findUnique({
       where: { email: userEmail },
-      select: { imagesID: true }, // Only fetch imagesID field
+      select: { imagesID: true }, 
     });
 
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    // 3️⃣ Remove the `GalleryNumber` from `imagesID` array
     const updatedImages = user.imagesID.filter((img) => img !== objectID);
 
     if (updatedImages.length === user.imagesID.length) {
@@ -34,7 +31,6 @@ export async function DELETE(request: Request) {
       );
     }
 
-    // 4️⃣ Update the user's `imagesID`
     const updatedUser = await prisma.userAuth.update({
       where: { email: userEmail },
       data: { imagesID: { set: updatedImages } },
