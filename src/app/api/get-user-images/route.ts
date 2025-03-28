@@ -1,19 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET() {
-  // const session = await getServerSession(authOptions);
-
-  // if (!session || !session.user?.email) {
-  //   return NextResponse.json(
-  //     { message: "Unauthorized because user is not Signin!" },
-  //     { status: 401 }
-  //   );
-  // }
-
-  // const userEmail = session.user?.email;
 
   try {
     const imagesResponse = await prisma.userAuth.findMany({
@@ -39,7 +27,7 @@ export async function GET() {
 
     const userImages = await prisma.imageStock.findMany({
       where: {
-        GalleryNumber: { in: uniqueImageIDs },
+        museumID: { in: uniqueImageIDs },
       },
     });
 
