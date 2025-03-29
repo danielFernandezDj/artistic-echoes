@@ -6,6 +6,8 @@ export async function GET() {
     const images = await prisma.imageStock.findMany({
       select: {
         id: true,
+        objectID: true,
+        museumID: true,
         primaryImage: true,
         primaryImageSmall: true,
         objectTitle: true,

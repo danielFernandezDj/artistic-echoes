@@ -22,8 +22,8 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     const [toggleLike, setToggleLike] = useState(false)
     const [imageIDs, setImageIds] = useState<string[]>([])
 
-    const isLiked = Array.isArray(imageIDs) && selectedImage?.GalleryNumber
-        ? imageIDs.includes(String(selectedImage.GalleryNumber))
+    const isLiked = Array.isArray(imageIDs) && selectedImage?.museumID
+        ? imageIDs.includes(String(selectedImage.museumID))
         : false;
 
     useEffect(() => {
@@ -49,13 +49,13 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     userEmail: session?.user?.email,
-                    GalleryNumber: selectedImage?.GalleryNumber,
+                    museumID: selectedImage?.museumID,
                 })
             })
 
             if (res.ok) {
                 setToggleLike(false)
-                setImageIds((prev) => prev.filter((id) => id !== String(selectedImage.GalleryNumber)))
+                setImageIds((prev) => prev.filter((id) => id !== String(selectedImage.museumID)))
             } else {
                 console.error("Files to remove favorite image")
             }
@@ -76,7 +76,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     userEmail: session?.user?.email,
-                    GalleryNumber: selectedImage.GalleryNumber,
+                    museumID: selectedImage.museumID,
                 })
             });
 
@@ -94,7 +94,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
             }
 
             setToggleLike((prev) => !prev);
-            setImageIds((prev) => [...new Set([...prev, String(selectedImage.GalleryNumber)])]);
+            setImageIds((prev) => [...new Set([...prev, String(selectedImage.museumID)])]);
 
         } catch (error) {
             console.error("Error updating favorite image", error);
