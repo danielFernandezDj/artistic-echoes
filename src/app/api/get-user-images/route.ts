@@ -1,33 +1,26 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET() {
-
+export async function GET(request: Request) {
   try {
-    const imagesResponse = await prisma.userAuth.findMany({
-      where: { email: "mdanif9728@gmail.com" },
-      select: {
-        imagesID: true,
-      },
-    });
+    const { searchParams } = new URL(request.url);
+    const userEmail = searchParams.get("userEmail");
 
-    const imageIDsNested = imagesResponse.flatMap((user) => user.imagesID);
-    const imageIDs = imageIDsNested.flat();
-
-    const uniqueImageIDs = [...new Set(imageIDs)];
-
-    console.log("uniqueImageIDs:", uniqueImageIDs);
-
-    if (!uniqueImageIDs || uniqueImageIDs.length === 0) {
+    if (!userEmail) {
       return NextResponse.json(
-        { message: "Failed to fetch user liked image IDs" },
-        { status: 500 }
+        { message: "Missing required fields" },
+        { status: 400 }
       );
     }
 
+    const user = await prisma.userAuth.findUnique({
+      where: { email: userEmail },
+      select: { imagesID: true },
+    });
+
     const userImages = await prisma.imageStock.findMany({
       where: {
-        museumID: { in: uniqueImageIDs },
+        museumID: { in: user?.imagesID },
       },
     });
 

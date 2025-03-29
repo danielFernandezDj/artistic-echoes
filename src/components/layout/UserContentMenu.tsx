@@ -12,27 +12,23 @@ export default function UserMenu() {
     const [loading, setLoading] = useState<boolean>(true);
     const [images, setImages] = useState<ImageStock[]>([]);
 
-    // Import user liked images number
-    useEffect(() => {
-        const fetchImages = async () => {
-            try {
-                const response = await fetch('/api/get-user-liked-img')
-                const data = await response.json()
-
-                setImageIds(Array.isArray(data.imageID) ? data.imageID : [])
-            } catch (error) {
-                console.error('Error fetching image Ids', error)
-            }
-        }
-        fetchImages();
-    }, [])
-
-    // Import all images
     useEffect(() => {
         const fetchImages = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('/api/get-user-images');
+                if (!session?.user?.email) return;
+                    
+                const userResponse = await fetch('/api/get-user-liked-img')
+                const newData = await userResponse.json()
+
+                setImageIds(Array.isArray(newData.imageID) ? newData.imageID : [])
+
+                const userEmail = session?.user?.email;
+                if (!userEmail) {
+                    throw new Error("User email not found");
+                }
+
+                const response = await fetch(`/api/get-user-images?userEmail=${encodeURIComponent(userEmail)}`);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch images: ${response.status}`);
                 }
@@ -50,7 +46,7 @@ export default function UserMenu() {
         }
 
         fetchImages();
-    }, []);
+    }, [session?.user?.email]);
 
     if (loading) {
         return (
@@ -74,8 +70,8 @@ export default function UserMenu() {
                         {images.map((image, index) => (
                             <div key={index} className="flex items-center gap-2">
                                 <Image
-                                    src={image.id}
-                                    alt={`Image ${index}`}
+                                    src={image.primaryImageSmall}
+                                    alt={image.objectTitle || `Image ${index}`}
                                     width={50}
                                     height={50}
                                     className="rounded"
