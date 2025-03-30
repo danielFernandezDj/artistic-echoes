@@ -13,24 +13,46 @@ export default function NavAlertContent() {
     return (
         <>
             <AlertDialog.Content className="flex flex-col gap-4">
+
                 <Flex justify="between" align="center">
-                    <AlertDialog.Title className="flex flex-col gap-2">
-                        <span className="text-base font-semibold"> Welcome! </span>
-                        <span className="text-magenta-color">
-                            {session?.user?.name}
-                        </span> 
-                        <Button
-                            color="red"
-                            onClick={() => signOut()}
+                    {session ? (
+                        <AlertDialog.Title className="flex flex-col gap-2">
+                            <span className="text-base font-semibold"> Welcome! </span>
+                            <span className="text-magenta-color">
+                                {session?.user?.name}
+                            </span>
+                            <Button
+                                color="red"
+                                onClick={() => signOut()}
+                            >
+                                Sign out
+                            </Button>
+                        </AlertDialog.Title>
+                    ) : (
+                        <Flex
+                            as="div"
+                            display="flex"
+                            direction="column"
+                            justify="center"
+                            className="w-full text-center"
                         >
-                            Sign out
-                        </Button>
-                    </AlertDialog.Title>
+                            <AlertDialog.Title
+                                className="text-xl font-semibold"
+                            >
+                                You&apos;re not signed in.
+                            </AlertDialog.Title>
+                            <AlertDialog.Description
+                                className="text-sm -mt-2 text-gray-500"
+                            >
+                                Log-in to view your favorite images and save your preferences.
+                            </AlertDialog.Description>
+                        </Flex>
+                    )}
 
                     <div className="absolute top-6 right-4">
                         <AlertDialog.Cancel
                             onClick={closeModal}
-                            className="text-red-500 relative cursor-pointer hover:rotate-90 transition ease-in-out duration-300"
+                            className="text-red-500 relative -top-1.5 cursor-pointer hover:rotate-90 transition ease-in-out duration-300"
                         >
                             <X size={32} />
                         </AlertDialog.Cancel>
@@ -38,7 +60,10 @@ export default function NavAlertContent() {
                 </Flex>
 
                 <SignIn />
-            </AlertDialog.Content>
+                <AlertDialog.Description className="text-center text-sm text-gray-500">
+                    You can sign in using your credentials or create a new account to get started.
+                </AlertDialog.Description>
+            </AlertDialog.Content >
         </>
     )
 }
