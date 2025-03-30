@@ -17,7 +17,7 @@ export default function UserMenu() {
             try {
                 setLoading(true);
                 if (!session?.user?.email) return;
-                    
+
                 const userResponse = await fetch('/api/get-user-liked-img')
                 const newData = await userResponse.json()
 
@@ -59,22 +59,21 @@ export default function UserMenu() {
     }
 
     return (
-        <div className="flex flex-col gap-2 bg-white p-8 rounded-lg shadow-md">
-
+        <div className="flex flex-col gap-2">
             {session && (
-                <div>
-                    <Text>
-                        Favorite images: {imageIDs.length}
+                <div className="flex flex-col gap-4">
+                    <Text weight={"medium"}>
+                        Total: {imageIDs.length}
                     </Text>
-                    <div>
+                    <div className="columns-1 md:columns-2 lg:columns-3 gap-6 ">
                         {images.map((image, index) => (
-                            <div key={index} className="flex items-center gap-2">
+                            <div key={index} className="flex items-center p-5 md:mb-5 md:p-0">
                                 <Image
                                     src={image.primaryImageSmall}
                                     alt={image.objectTitle || `Image ${index}`}
-                                    width={50}
-                                    height={50}
-                                    className="rounded"
+                                    width={100}
+                                    height={100}
+                                    className="w-full h-auto transition-all duration-200 ease-in-out border-4 md:border-8 hover:scale-105 cursor-pointer"
                                 />
                             </div>
                         ))}
