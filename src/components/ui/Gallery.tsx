@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ImageDown } from "lucide-react";
 import ImageView from "./ImageView"
-import { ImageStock } from "@/lib/types";
+import { ImageStock } from "@/lib/ImageStockType";
 
 const Gallery: React.FC = () => {
   const [images, setImages] = useState<ImageStock[]>([]);
@@ -53,7 +53,6 @@ const Gallery: React.FC = () => {
           setImageView={setImageView}
           selectedImage={selectedImage}
           setSelectedImage={setSelectedImage}
-          image={selectedImage}
         />
       )}
       <div className="w-full h-auto m-auto px-4 md:px-16">
@@ -62,7 +61,7 @@ const Gallery: React.FC = () => {
             <div
               key={index}
               onClick={() => {
-                setSelectedImage(image)
+                setSelectedImage(image);
                 setImageView(true)
               }}
               className="relative mb-8 md:mb-16 group"

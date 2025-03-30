@@ -2,7 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useSession } from "next-auth/react";
+import { Text } from "@radix-ui/themes";
 import Image from 'next/image'
+import SignInButton from '../ui/SignInButton';
 
 interface NavItem {
   label: string;
@@ -38,7 +41,8 @@ const useScrolling = () => {
   return scrolling;
 }
 
-const Navbar = () => {
+export default function Navbar() {
+  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState('')
 
@@ -85,7 +89,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             {navigation.map((item) => (
               <a
                 key={item.label}
@@ -104,25 +108,35 @@ const Navbar = () => {
               <a
                 href='https://buymeacoffee.com/daniel.tech'
                 target='_blank'
-                className="text-magenta-color cursor-alias font-mono text-base font-bold"
+                className="text-magenta-color cursor-alias font-mono text-base font-bold hidden lg:block"
               >
                 Donate⤴︎
               </a>
-              <button className="bg-magenta-color text-white shadow-lg shadow-magenta-color/50 font-mono px-4 py-2 rounded-md text-sm font-medium hover:bg-magenta-hover transition-colors">
-                Sign In
-              </button>
+
+              <SignInButton />
             </div>
 
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center gap-6">
+            <div className='hidden md:flex items-center gap-4 '>
+              <a
+                href='https://buymeacoffee.com/daniel.tech'
+                target='_blank'
+                className="text-magenta-color cursor-alias font-mono text-base font-bold"
+              >
+                Donate⤴︎
+              </a>
+
+              <SignInButton />
+            </div>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-600 hover:text-gray-900 focus:outline-none"
             >
               {isOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-6 w-6 text-red-500" />
               ) : (
                 <Menu className="h-6 w-6" />
               )}
@@ -133,7 +147,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden h-screen  bg-white transitionAll">
+        <div className="lg:hidden h-screen  bg-white transitionAll">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white">
             {navigation.map((item) => (
               <a
@@ -151,20 +165,23 @@ const Navbar = () => {
               <a
                 href='https://buymeacoffee.com/daniel.tech'
                 target='_blank'
-                className="text-magenta-color font-mono px-3 py-2 rounded-md text-base font-bold"
+                className="text-magenta-color w-full font-mono px-3 py-2 rounded-md text-base font-bold"
               >
                 Donate⤴︎
               </a>
-              <button className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-md text-base font-mono font-medium hover:bg-blue-700 transition-colors">
-                Sign In
-              </button>
             </div>
+          </div>
+          <div className='flex gap-4 items-center justify-center pl-5 pb-2 fixed bottom-5'>
+            <SignInButton />
+            <Text className='font-mono text-xl text-gray-800'>
+              {session?.user?.name}
+            </Text>
           </div>
         </div>
       )}
+
 
     </nav>
   );
 };
 
-export default Navbar;

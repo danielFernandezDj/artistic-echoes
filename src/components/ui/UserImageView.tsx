@@ -16,7 +16,7 @@ interface ImageViewProps {
     setSelectedImage: React.Dispatch<React.SetStateAction<ImageStock | null>>;
 }
 
-const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selectedImage, setSelectedImage }) => {
+const UserImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selectedImage, setSelectedImage }) => {
     const { data: session } = useSession();
     const { openModal } = useAuthModal();
     const [toggleLike, setToggleLike] = useState(false)
@@ -123,13 +123,13 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     return (
         <Container
             size="full"
-            className="insert-0 flex justify-center h-screen z-50 bg-black/80 p-4 right-0"
+            className="insert-0 flex justify-center h-screen z-50 bg-black/80 p-4 right-0 top-0"
             position="fixed"
         >
             <Container
                 size="lg"
                 position="relative"
-                className="pt-8 mt-2 rounded-xl bg-white"
+                className="pt-8 mt-2 rounded-xl bg-white top-10"
             >
                 <div className="flex justify-between w-full h-auto m-auto mb-4">
                     <button
@@ -217,4 +217,4 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
     )
 }
 
-export default ImageView;
+export default UserImageView;

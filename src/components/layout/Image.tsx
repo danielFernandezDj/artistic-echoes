@@ -26,7 +26,7 @@ const Image: React.FC<ImageProps> = ({ src, alt, className }) => {
         src={src}
         alt={alt}
         onLoad={handleImageLoad}
-        className={`transition-opacity duration-300 ${!imageSize ? "opacity-0" : "opacity-100"}`}
+        className={`transition-opacity duration-300 ${!imageSize ? "opacity-0" : "opacity-100"} border-4`}
         style={!imageSize ? { visibility: "hidden" } : {}}
       />
 
