@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 import { Text } from "@radix-ui/themes";
 import Image from "next/image";
 import { ImageStock } from "@/lib/ImageStockType";
-// import ImageView from "../ui/ImageView";
 import UserImageView from "../ui/UserImageView";
 
 export default function UserMenu() {
