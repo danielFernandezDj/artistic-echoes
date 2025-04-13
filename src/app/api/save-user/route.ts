@@ -28,7 +28,7 @@ export async function POST(req: Request) {
         email: email,
         password: hashedPassword,
         createdAt: new Date(),
-        imagesID: imagesID || "", // ✅ Always store a string
+        imagesID: imagesID || "",
       },
     });
 
