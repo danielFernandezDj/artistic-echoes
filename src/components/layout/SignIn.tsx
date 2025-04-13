@@ -1,11 +1,28 @@
 "use client"
 
+import { useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { Flex, Container, Button, } from "@radix-ui/themes";
 import UserMenu from "./UserContentMenu";
 
 export default function SignIn() {
     const { data: session } = useSession();
+
+    useEffect(() => {
+        const saveUser = async () => {
+            if (!session?.user?.email) return;
+
+            await fetch('/api/save-user', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: session?.user?.email,
+                }),
+            });
+        };
+
+        saveUser();
+    }, [session]);
 
     return (
         <>
