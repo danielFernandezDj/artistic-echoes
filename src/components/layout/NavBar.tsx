@@ -169,9 +169,9 @@ export default function Navbar() {
             </div>
           </div>
           <div className='flex w-full items-center justify-center pl-5 pb-4 fixed bottom-5'>
-            {/* <div className='flex gap-4 items-center justify-center border-2 border-magenta-color/50 rounded-lg p-2 '> */}
+            <div className='border-2 border-magenta-color/50 rounded-lg p-2 '>
               <SignInButton />
-            {/* </div> */}
+            </div>
           </div>
         </div>
       )}

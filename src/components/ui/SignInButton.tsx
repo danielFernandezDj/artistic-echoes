@@ -32,7 +32,7 @@ export default function SignInButton() {
                             color="iris"
                             fallback={`${userInitials}`}
                         />
-                        <Text className='font-mono text-xl text-gray-800'>
+                        <Text className='font-mono text-xl text-gray-800 lg:hidden'>
                             {session?.user?.name}
                         </Text>
                     </Flex>)
