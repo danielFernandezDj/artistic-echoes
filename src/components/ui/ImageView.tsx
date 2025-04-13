@@ -162,7 +162,7 @@ const ImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, selected
                         </Link>
                         <a
                             href={`/api/download/${selectedImage.id}`} download
-                            className="flex gap-2 items-center p-2 font-bold rounded-md border text-gray-800 hover:border-gray-700 hover:bg-gray-100"
+                            className="flex gap-2 items-center p-2 font-bold rounded-md text-gray-800 hover:bg-gray-100"
                         >
                             Download
                             <ImageDown size={26} />

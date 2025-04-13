@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { useSession } from "next-auth/react";
-import { Text } from "@radix-ui/themes";
 import Image from 'next/image'
 import SignInButton from '../ui/SignInButton';
 
@@ -42,7 +40,6 @@ const useScrolling = () => {
 }
 
 export default function Navbar() {
-  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState('')
 
@@ -171,11 +168,10 @@ export default function Navbar() {
               </a>
             </div>
           </div>
-          <div className='flex gap-4 items-center justify-center pl-5 pb-2 fixed bottom-5'>
-            <SignInButton />
-            <Text className='font-mono text-xl text-gray-800'>
-              {session?.user?.name}
-            </Text>
+          <div className='flex w-full items-center justify-center pl-5 pb-4 fixed bottom-5'>
+            {/* <div className='flex gap-4 items-center justify-center border-2 border-magenta-color/50 rounded-lg p-2 '> */}
+              <SignInButton />
+            {/* </div> */}
           </div>
         </div>
       )}
