@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { AuthModalProvider } from '@/context/AuthModalContext';
-import userEvent from '@testing-library/user-event';
 import { SessionProvider } from 'next-auth/react';
 import Gallery from '@/components/ui/Gallery';
 import fetchMock from 'jest-fetch-mock';
@@ -10,8 +9,6 @@ fetchMock.enableMocks();
 beforeEach(() => {
     fetchMock.resetMocks();
 });
-
-const user = userEvent.setup();
 
 test('fetches and displays images from API', async () => {
     const mockImages = [
