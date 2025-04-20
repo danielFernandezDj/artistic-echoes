@@ -1,5 +1,22 @@
 "use client";
 
+/**
+ * ImageView.tsx
+ *
+ * Renders a modal to view a single image in detail.
+ * Allows logged-in users to like/unlike the image and download it.
+ *
+ * Props:
+ * - imageView: boolean to toggle modal visibility
+ * - setImageView: setter to close the modal
+ * - selectedImage: image object selected from the gallery
+ * - setSelectedImage: clears the selected image on modal close
+ *
+ * Context:
+ * - Uses `useSession` to check for auth
+ * - Uses `useAuthModal` to prompt login if needed
+ */
+
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Container from "../layout/Container";
