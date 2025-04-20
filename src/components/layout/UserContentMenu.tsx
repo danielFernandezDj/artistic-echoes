@@ -1,5 +1,16 @@
 "use client"
 
+/**
+ * UserContentMenu.tsx
+ *
+ * A dropdown menu for authenticated users in the navbar.
+ * Provides quick links to user content and sign out option.
+ *
+ * Uses:
+ * - Session to display user info
+ * - signOut() from next-auth
+ */
+
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Text } from "@radix-ui/themes";
