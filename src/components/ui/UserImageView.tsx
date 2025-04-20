@@ -1,5 +1,26 @@
 "use client";
 
+/**
+ * UserImageView.tsx
+ *
+ * This component renders a full-screen image viewer modal for a selected artwork.
+ * It allows authenticated users to:
+ * - Like or unlike an image (add/remove it from favorites)
+ * - Download the image
+ * - View extended metadata like artist, culture, dates, etc.
+ *
+ * Props:
+ * - imageView: boolean to toggle modal visibility
+ * - setImageView: setter to toggle the modal state
+ * - selectedImage: the image data object being viewed
+ * - setSelectedImage: setter to clear the selected image on close
+ *
+ * It uses:
+ * - `useSession()` to check for logged-in users
+ * - `useAuthModal()` to prompt login if not authenticated
+ * - `useEffect()` to fetch user-liked images and lock scroll
+ */
+
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Container from "../layout/Container";
@@ -141,6 +162,7 @@ const UserImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, sele
 
                     <div className="flex items-center gap-4">
                         <Link
+                            data-testid="like-button"
                             onClick={() => {
                                 if (!session) {
                                     openModal();
@@ -157,6 +179,7 @@ const UserImageView: React.FC<ImageViewProps> = ({ imageView, setImageView, sele
                         >
                             <Heart
                                 size={26}
+                                data-testid="like-icon"
                                 className={isLiked || toggleLike ? 'fill-red-500' : 'fill-none'}
                             />
                         </Link>
