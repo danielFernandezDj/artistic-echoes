@@ -1,5 +1,19 @@
 "use client"
 
+/**
+ * SignIn.tsx
+ *
+ * Login form component used within a modal.
+ * Collects user email and triggers authentication flow.
+ *
+ * Props:
+ * - onClose: callback to close the modal after login
+ *
+ * Uses:
+ * - `signIn()` from next-auth for login
+ * - Simple email form with loading and error handling
+ */
+
 import { useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { Flex, Container, Button, } from "@radix-ui/themes";
