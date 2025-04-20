@@ -1,5 +1,17 @@
 "use client"
 
+/**
+ * Container.tsx
+ *
+ * A reusable layout wrapper component that handles
+ * positioning, max-width, and responsive padding.
+ *
+ * Props:
+ * - size: preset sizing classes (e.g. 'full', 'lg')
+ * - position: optional positioning class (e.g. 'relative', 'fixed')
+ * - className: any additional tailwind classes to apply
+ */
+
 import React, { JSX } from 'react';
 
 interface ContainerProps {
