@@ -1,5 +1,17 @@
 "use client";
 
+/**
+ * SignInButton.tsx
+ *
+ * Displays a button or avatar depending on the user's auth state.
+ * - If not logged in: shows a "Sign In" button and opens login modal
+ * - If logged in: shows user avatar and name
+ *
+ * Uses:
+ * - `useSession()` to get user session
+ * - `useAuthModal()` to open the modal for signing in
+ */
+
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { Button, Avatar } from "@radix-ui/themes";
 import NavAlertContent from "../layout/NavAlertContent";
