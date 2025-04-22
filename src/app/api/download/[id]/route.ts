@@ -1,3 +1,19 @@
+/**
+ * GET /api/download/[id]
+ *
+ * Method: GET
+ * Description:
+ * - Streams the image file as a download based on the given image ID.
+ *
+ * Params:
+ * - id: string (image ID)
+ *
+ * Response:
+ * - A downloadable image file
+ *
+ * Auth: No
+ */
+
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 

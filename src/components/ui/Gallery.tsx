@@ -1,5 +1,18 @@
 "use client";
 
+/**
+ * Gallery.tsx
+ *
+ * This component fetches image data from the `/api/images` endpoint and displays them
+ * in a responsive, scrollable gallery layout. Each image is clickable and opens a detailed view.
+ *
+ * Features:
+ * - Fetching and displaying images from the backend
+ * - Loading state UI
+ * - Triggers `ImageView` when an image is clicked
+ * - Includes download links for each image
+ */
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ImageDown } from "lucide-react";

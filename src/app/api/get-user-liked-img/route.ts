@@ -1,3 +1,18 @@
+/**
+ * GET /api/get-user-liked-img
+ *
+ * Method: GET
+ * Description:
+ * - Retrieves the IDs of images the current logged-in user has liked.
+ *
+ * Response:
+ * {
+ *   imageID: string[]
+ * }
+ *
+ * Auth: Yes (requires user session)
+ */
+
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
