@@ -1,3 +1,26 @@
+/**
+ * POST /api/save-user
+ *
+ * Method: POST
+ * Description:
+ * - Creates a new user profile in the database or updates an existing one based on email.
+ *
+ * Request Body:
+ * {
+ *   name: string,
+ *   email: string,
+ *   image?: string
+ * }
+ *
+ * Response:
+ * {
+ *   success: boolean,
+ *   message?: string
+ * }
+ *
+ * Auth: Yes (requires a valid user session)
+ */
+
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 

@@ -1,3 +1,24 @@
+/**
+ * GET /api/images
+ *
+ * Method: GET
+ * Description:
+ * - Fetches and returns all image entries from the database.
+ *
+ * Response:
+ * [
+ *   {
+ *     id: string,
+ *     objectTitle: string,
+ *     primaryImageSmall: string,
+ *     ...
+ *   },
+ *   ...
+ * ]
+ *
+ * Auth: No
+ */
+
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 

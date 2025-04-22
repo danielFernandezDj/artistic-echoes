@@ -1,5 +1,18 @@
 "use client"
 
+/**
+ * Image.tsx
+ *
+ * A wrapper component around Next.js <Image /> that includes
+ * a skeleton loader until the image has fully loaded.
+ *
+ * Props:
+ * - src, alt, className: passed directly to Next.js Image
+ *
+ * State:
+ * - Tracks loading state and toggles opacity after image load
+ */
+
 import React, { useState } from "react";
 
 interface ImageProps {

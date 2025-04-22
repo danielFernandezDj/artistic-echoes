@@ -1,3 +1,25 @@
+/**
+ * PUT /api/update-user-favorite
+ *
+ * Method: PUT
+ * Description:
+ * - Adds an image ID to the logged-in user's list of favorites.
+ *
+ * Request Body:
+ * {
+ *   userEmail: string,
+ *   museumID: string
+ * }
+ *
+ * Response:
+ * {
+ *   success: boolean,
+ *   message?: string
+ * }
+ *
+ * Auth: Yes (requires user session)
+ */
+
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 

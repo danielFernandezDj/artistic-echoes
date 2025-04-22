@@ -1,3 +1,25 @@
+/**
+ * DELETE /api/remove-user-image
+ *
+ * Method: DELETE
+ * Description:
+ * - Removes an image ID from the user's list of liked images.
+ *
+ * Request Body:
+ * {
+ *   userEmail: string,
+ *   museumID: string
+ * }
+ *
+ * Response:
+ * {
+ *   success: boolean,
+ *   message?: string
+ * }
+ *
+ * Auth: Yes (requires user session)
+ */
+
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 

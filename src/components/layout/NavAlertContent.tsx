@@ -1,5 +1,12 @@
 "use client"
 
+/**
+ * NavAlertContent.tsx
+ *
+ * A UI component that displays a dropdown message or alert inside the navigation bar.
+ * This is likely used to show info for non-authenticated users or new visitors.
+ */
+
 import { AlertDialog, Flex, Button } from "@radix-ui/themes"
 import { useAuthModal } from "@/context/AuthModalContext"
 import SignIn from "@/components/layout/SignIn"

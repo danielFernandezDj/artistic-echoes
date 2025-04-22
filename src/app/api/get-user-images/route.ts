@@ -1,3 +1,20 @@
+/**
+ * GET /api/get-user-images
+ *
+ * Method: GET
+ * Description:
+ * - Fetches the current logged-in user's profile information.
+ *
+ * Response:
+ * {
+ *   name: string,
+ *   email: string,
+ *   ...
+ * }
+ *
+ * Auth: Yes (requires user session)
+ */
+
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
