@@ -3,16 +3,20 @@ export default function License() {
     return (
         <div>
             <main className="flex justify-center items-center w-svh">
-                <strong className="text-3xl">
-                    This is License page.
-                    The license page is a legal document that outlines the terms and conditions under which a product or service can be used. It typically includes information about the rights and responsibilities of both the licensor (the party granting the license) and the licensee (the party receiving the license). The license page may also include details about usage restrictions, payment terms, and any warranties or disclaimers associated with the product or service.
-                    <br />
-                    <br />
-                    The license page is important because it helps protect the intellectual property rights of the licensor while also providing clarity and transparency to the licensee regarding their rights and obligations. It is essential for both parties to carefully review and understand the terms of the license before agreeing to them.
-                    <br />
-                    <br />
-                    In summary, the license page serves as a legal agreement that governs the use of a product or service, ensuring that both parties are aware of their rights and responsibilities.
-                </strong>
+                <h1>License</h1>
+                <p>
+                    Artistic Echoes utilizes public domain images and data provided by
+                    <a href="https://metmuseum.github.io/" target="_blank">The Metropolitan Museum of Art Collection API</a>.
+                    The Metropolitan Museum of Art provides open access to over 375,000 images and associated data for artworks that the museum believes to be in the public domain.
+                </p>
+                <p>
+                    All artworks featured on this platform fall under the Creative Commons Zero (CC0) license, meaning they are free to use for any purpose, with no permission required.
+                    You can learn more about the terms of use on
+                    <a href="https://www.metmuseum.org/about-the-met/policies-and-documents/open-access" target="_blank">The Met’s Open Access initiative</a>.
+                </p>
+                <p>
+                    This website and its content (excluding external artwork and data from The Met) is © 2025 Artistic Echoes. All rights reserved.
+                </p>
             </main>
         </div>
     )
