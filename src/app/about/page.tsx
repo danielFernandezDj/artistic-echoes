@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 
 export default function About() {
     return (
-        <div className="flex flex-col w-full h-auto bg-slate-50 dark:bg-slate-900">
+        <div className="flex flex-col w-full h-auto bg-slate-50 dark:bg-slate-200">
             <Container
                 as="section"
                 size="sm"
@@ -14,7 +14,7 @@ export default function About() {
                 position="relative"
                 className="flex flex-col gap-4 justify-center items-center w-svh m-8"
             >
-                <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 underline decoration-1 decoration-magenta-color/50 underline-offset-8">
+                <h1 className="text-3xl font-bold text-center text-gray-800  underline decoration-1 decoration-magenta-color/50 underline-offset-8">
                     About Artistic Echoes
                 </h1>
                 <Flex
