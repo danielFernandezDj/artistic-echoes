@@ -82,7 +82,7 @@ export default function Navbar() {
               width={40}
               height={40}
             />
-            <span className="text-2xl font-bold text-gradient">Artistic Echoes</span>
+            <span className="text-2xl font-bold text-gradient">Artistic Echoes</span>q
           </div>
 
           {/* Desktop Navigation */}
