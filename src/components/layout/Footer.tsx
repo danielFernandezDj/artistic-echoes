@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Github } from 'lucide-react';
+import { Instagram, Linkedin, Github } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
