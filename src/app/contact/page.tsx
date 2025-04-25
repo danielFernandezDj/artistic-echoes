@@ -1,7 +1,5 @@
 "use client"
 
-import Container from "@/components/layout/Container"
-import { Flex } from "@radix-ui/themes";
 import Footer from "@/components/layout/Footer";
 import Head from 'next/head';
 
