@@ -11,7 +11,7 @@ export default function Contact() {
                 <meta name="description" content="Get in touch with Daniel, creator of Artistic Echoes." />
             </Head>
 
-            <main className="max-w-3xl mx-auto px-4 py-20">
+            <main className="max-w-3xl mx-auto p-4 my-4">
                 <h1 className="text-4xl font-bold mb-4 pb-1 border-b-2 border-magenta-color/50 inline-block">
                     Get in Touch
                 </h1>
