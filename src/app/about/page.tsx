@@ -21,7 +21,7 @@ export default function About() {
                     direction="column"
                     align="center"
                     justify="center"
-                    className="w-full h-auto p-4 gap-10 bg-slate-100 rounded-lg shadow-md"
+                    className="w-full h-auto p-4 gap-10 bg-white rounded-lg shadow-md"
                 >
                     <p className="indent-4">
                         Artistic Echoes is a web application designed to explore and discover artworks from The Metropolitan Museum of Art Collection.
@@ -29,7 +29,7 @@ export default function About() {
                         The application is built using modern web technologies, ensuring a responsive and engaging experience across devices.
                     </p>
                     <p className="indent-4">
-                        The project was developed by <span className="font-medium text-orange-color">&quot;Daniel Fernandez&quot;</span>, a passionate developer and artist, who aims to bridge the gap between technology and art.
+                        The project was developed by <a href="https://dani-portfolio-app.vercel.app/" target="_blank" className="font-medium text-orange-color">&quot;Daniel Fernandez&quot;</a>, a passionate developer and artist, who aims to bridge the gap between technology and art.
                         By leveraging the power of The Met&apos;s open access collection, Artistic Echoes provides a unique platform for art enthusiasts, students, and anyone interested in exploring the world of art.
                         The application is designed to be user-friendly, allowing users to easily navigate through the collection and discover new artworks.
                         The platform also emphasizes the importance of accessibility, ensuring that everyone can enjoy and appreciate the beauty of art.
