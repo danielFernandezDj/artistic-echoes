@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Artistic Echoes
 
-First, run the development server:
+A modern, immersive web application that brings historical and classical art into the digital age.  
+Built with Next.js, Tailwind CSS, and powered by **The Metropolitan Museum of Art Collection API**, *Artistic Echoes* is part of Cole’s professional portfolio showcasing clean development practices, API integration, and creative UI/UX design.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📸 Preview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[Add a screenshot or GIF of your app here]
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🚀 Live Demo
 
-To learn more about Next.js, take a look at the following resources:
+[Deploy link if available — e.g., Vercel URL]
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Features
 
-## Deploy on Vercel
+- 🎨 Access and display public domain artworks via The Met’s Collection API.
+- 📚 Dynamic and informative About, Contact, and License pages.
+- ⚡ Fast performance powered by Next.js optimization.
+- 📱 Fully responsive — works seamlessly on desktop, tablet, and mobile.
+- 🎯 SEO-optimized with descriptive metadata.
+- 🔒 Clear license information respecting API usage and Open Access policies.
+- 🖼️ Beautiful, minimalist UI styled with Tailwind CSS.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Built With
+
+- [Next.js](https://nextjs.org/) — React Framework for production-ready applications.
+- [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS for modern designs.
+- [The Metropolitan Museum of Art Collection API](https://metmuseum.github.io/) — Open Access art data.
+- [TypeScript](https://www.typescriptlang.org/) *(optional)* — If you used it.
+- [Vercel](https://vercel.com/) — (Deployment platform) *(if you are deploying there)*
+
+---
+
+## 📚 License and Attribution
+
+Artistic Echoes uses images and metadata provided under the [Open Access policy](https://www.metmuseum.org/about-the-met/policies-and-documents/open-access) of The Metropolitan Museum of Art.
+
+- All artworks presented are in the public domain (Creative Commons Zero, CC0).
+- This project is © 2025 Cole. All rights to the platform's original code and design are reserved.
+
+---
+
+## 📬 Contact
+
+If you'd like to get in touch for collaboration, job opportunities, or feedback:
+
+- Email: [hello@artisticechoes.app](mailto:hello@artisticechoes.app)
+- Instagram: [@artisticechoes](https://instagram.com/artisticechoes)
+- GitHub: [Artistic Echoes Repository](https://github.com/cole/artisticechoes)
+
+---
+
+## 🤝 Acknowledgements
+
+- Huge thanks to [The Metropolitan Museum of Art](https://www.metmuseum.org/) for providing open access to their collection.
+- Inspired by the idea that art should be accessible to all.
+
+---
+
+# 📈 Goals
+
+Artistic Echoes is not just an art gallery — it’s a demonstration of Cole's passion for:
+- Elegant and user-centered web development
+- Seamless integration of third-party APIs
+- Creating memorable digital experiences
+
+---
+
+### ⭐ If you like this project, feel free to star it on GitHub or reach out for collaboration!
