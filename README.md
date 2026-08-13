@@ -1,78 +1,110 @@
-
 # Artistic Echoes
 
-A modern, immersive web application that brings historical and classical art into the digital age.  
-Built with Next.js, Tailwind CSS, and powered by **The Metropolitan Museum of Art Collection API**, *Artistic Echoes* is part of Cole’s professional portfolio showcasing clean development practices, API integration, and creative UI/UX design.
+Artistic Echoes is a full-stack web application for exploring historical and classical artwork through The Metropolitan Museum of Art Collection API.
+
+The project was built as an exploration of API integration, persistent user data, authentication, database-backed features, and responsive application design using Next.js and TypeScript.
+
+> **Project status:** Artistic Echoes is currently undergoing a technical recovery and modernization process. The application was originally deployed successfully, but parts of the data layer now require repair after changes to its database infrastructure. The recovery process is being documented as an engineering debugging case study.
 
 ---
 
-## 📸 Preview
+## Overview
 
-[Add a screenshot or GIF of your app here]
+Artistic Echoes provides an interactive interface for discovering public-domain artwork from The Metropolitan Museum of Art.
 
----
-
-## 🚀 Live Demo
-
-[Deploy link if available — e.g., Vercel URL]
+Rather than functioning only as a static gallery, the application combines external API data with application-managed user data, allowing the project to explore the interaction between third-party services, authentication, database persistence, and frontend state.
 
 ---
 
-## ✨ Features
+## Features
 
-- 🎨 Access and display public domain artworks via The Met’s Collection API.
-- 📚 Dynamic and informative About, Contact, and License pages.
-- ⚡ Fast performance powered by Next.js optimization.
-- 📱 Fully responsive — works seamlessly on desktop, tablet, and mobile.
-- 🎯 SEO-optimized with descriptive metadata.
-- 🔒 Clear license information respecting API usage and Open Access policies.
-- 🖼️ Beautiful, minimalist UI styled with Tailwind CSS.
+- Browse artwork provided by The Metropolitan Museum of Art Collection API.
 
----
+- Display artwork metadata and imagery from an external API.
 
-## 🛠️ Built With
+- User authentication and account-aware application behavior.
 
-- [Next.js](https://nextjs.org/) — React Framework for production-ready applications.
-- [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS for modern designs.
-- [The Metropolitan Museum of Art Collection API](https://metmuseum.github.io/) — Open Access art data.
-- [TypeScript](https://www.typescriptlang.org/) *(optional)* — If you used it.
-- [Vercel](https://vercel.com/) — (Deployment platform) *(if you are deploying there)*
+- Save and retrieve favorite artworks associated with users.
+
+- Database-backed persistence for application-specific user data.
+
+- API routes for communication between the application and persistence layer.
+
+- Responsive interface built for desktop and mobile experiences.
+
+- Supporting About, Contact, and licensing information.
 
 ---
 
-## 📚 License and Attribution
+## Technology Stack
 
-Artistic Echoes uses images and metadata provided under the [Open Access policy](https://www.metmuseum.org/about-the-met/policies-and-documents/open-access) of The Metropolitan Museum of Art.
-
-- All artworks presented are in the public domain (Creative Commons Zero, CC0).
-- This project is © 2025 Cole. All rights to the platform's original code and design are reserved.
-
----
-
-## 📬 Contact
-
-If you'd like to get in touch for collaboration, job opportunities, or feedback:
-
-- Email: [hello@artisticechoes.app](mailto:hello@artisticechoes.app)
-- Instagram: [@artisticechoes](https://instagram.com/artisticechoes)
-- GitHub: [Artistic Echoes Repository](https://github.com/cole/artisticechoes)
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Prisma ORM
+- PostgreSQL
+- Supabase
+- The Metropolitan Museum of Art Collection API
+- Jest
+- Vercel
 
 ---
 
-## 🤝 Acknowledgements
+## Architecture
 
-- Huge thanks to [The Metropolitan Museum of Art](https://www.metmuseum.org/) for providing open access to their collection.
-- Inspired by the idea that art should be accessible to all.
+Artistic Echoes combines two primary data sources.
 
----
+The Metropolitan Museum of Art Collection API provides public artwork information and imagery, while the application's own persistence layer manages user-specific data such as saved artwork.
 
-# 📈 Goals
+The application uses Next.js for both the frontend experience and server-side application routes, Prisma as the database access layer, and PostgreSQL for persistent application data.
 
-Artistic Echoes is not just an art gallery — it’s a demonstration of Cole's passion for:
-- Elegant and user-centered web development
-- Seamless integration of third-party APIs
-- Creating memorable digital experiences
+This separation between external artwork data and internally managed user data makes the project useful for exploring API integration, persistence, authentication, and failure boundaries across multiple services.
 
 ---
 
-### ⭐ If you like this project, feel free to star it on GitHub or reach out for collaboration!
+## Testing
+
+The project includes Jest configuration and automated testing introduced during development.
+
+Testing work will continue as part of the application's recovery process, with particular attention to business behavior, API boundaries, regression protection, and critical user workflows.
+
+---
+
+## Engineering Recovery & Debugging
+
+Artistic Echoes is also being used as a practical debugging and software recovery project.
+
+After its original development and deployment, changes to the application's database infrastructure left parts of the production system unable to operate as originally designed.
+
+Instead of rebuilding the application from scratch, the recovery process focuses on systematically investigating the existing system:
+
+- Reproducing failures and recording observable behavior.
+- Forming hypotheses about database, ORM, configuration, and application-layer failures.
+- Testing each hypothesis against the existing codebase and runtime behavior.
+- Repairing or replacing failed infrastructure while preserving working application behavior.
+- Adding regression protection where appropriate.
+- Documenting technical decisions, results, and lessons learned.
+
+The investigation is being maintained as a structured engineering debugging log and will eventually become a complete case study covering the diagnosis, recovery, and modernization of the application.
+
+---
+
+## Current Status
+
+The source code and original application architecture remain available in this repository.
+
+The current engineering objective is to restore the persistence layer, verify application behavior, identify additional regressions, and return the application to a reliable deployable state.
+
+The existing codebase is intentionally being investigated rather than replaced so that the debugging process reflects the constraints of maintaining and recovering a real existing system.
+
+---
+
+## Local Development
+
+Clone the repository:
+
+```bash
+git clone https://github.com/danielFernandezDj/artistic-echoes.git
+cd artistic-echoes
+npm install
