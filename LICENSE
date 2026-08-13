@@ -1,21 +1,22 @@
-MIT License
 
-Copyright (c) 2025 Daniel Fernandez
+Hay algo deliberado en este README: **no estamos escondiendo que está roto**. Estamos convirtiendo ese hecho en contexto de ingeniería.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Y fíjate en la narrativa que produce para un recruiter:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+> Construí una aplicación full-stack → funcionó y fue desplegada → su infraestructura de datos posteriormente falló → en lugar de tirarla y empezar otra, estoy diagnosticando un sistema existente → registro hipótesis, pruebas y resultados → restauro el sistema → añado regression coverage.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Eso tiene **mucho más valor para Support/QA** que presentar simplemente otra aplicación Next.js bonita.
+
+También preservamos algo fundamental: **no afirmamos todavía cuál es la causa del fallo**. Mencionamos que la capa de persistencia requiere reparación, que ya sabemos, pero Prisma, PostgreSQL, configuración, dependencias, etc. aparecen como cosas que vamos a **investigar**, no como conclusiones anticipadas.
+
+Cuando hagamos el debugging, será la evidencia la que determine la historia final.
+
+Después de cambiar el README, también cambiaría únicamente el **About** de:
+
+> `This is an image stock app developed with Next.js.`
+
+a:
+
+> **Full-stack art discovery application integrating external APIs, authentication, and persistent user data.**
+
+Y ahí paramos. **Nada de tocar código, DB, dependencies ni deployment todavía.** El paciente se queda exactamente como está hasta que empecemos formalmente la investigación. 
